@@ -1,0 +1,56 @@
+body{
+	background-color: #fafafa;
+}
+.kotak{
+	background-color: #fffeff;
+	box-shadow: 0px 2px 3px #333;
+	display: inline-block;
+}
+.kotak .cover-kotak{
+	overflow: hidden;
+	max-height: 200px;
+
+}
+.kotak .badan-kotak{
+	padding: 10px 20px;
+	margin-top: 10px;
+}
+.kotak .badan-kotak .judul{
+	font-weight: 1000;
+	color: #333
+}
+.kotak .badan-kotak .harga{
+	text-align: right;
+}
+.kotak .badan-kotak .harga:before{
+	content: 'Rp.'
+}
+.kotak .badan-kotak .harga:after{
+	content: '.00,-'
+}
+a > .kotak{
+	color: #000
+}
+a:hover > .kotak{
+	color: #333
+}
+.footer{
+	padding: 20px 30px;
+	color: #454751;
+	font-weight: 800;
+	font-size: 18px;
+	text-align: right;
+}
+.footer .created{
+	color: #252731;
+	font-weight: 500;
+	font-size: 15px;
+}
+.btn-leon{
+	background-color: #1f6e70;
+	color: white;
+}
+.btn-leon:hover{
+	background-color: #0f5e60;
+	color: white;
+}
