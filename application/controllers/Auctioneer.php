@@ -25,4 +25,7 @@ class Auctioneer extends CI_Controller {
 	public function goods(){
 		$this->load->view('auctioneer/goods');
 	}
+	public function goods_create(){
+		$this->load->view('auctioneer/goods_create');
+	}
 }

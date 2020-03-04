@@ -20,7 +20,12 @@
  <main>
   <div class="container mt-4">
     <div class="card mb-4">
-      <div class="card-header" style="background: #fafafa;"><i class="fas fa-table mr-1"></i>Barang Lelang</div>
+      <div class="card-header" style="background: #fafafa;">
+      	<div class="row">
+      	<div class="col"><i class="fas fa-table mr-1"></i>Barang Lelang</div>
+      	<div class="col text-right"><a href="<?= base_url()?>auctioneer/goods_create" class="btn btn-leon">Tambah Barang</a></div>
+      </div>
+  </div>
       <div class="card-body">
     <div class="table-responsive">
    <table class="table" id="dataTable">
@@ -42,8 +47,8 @@
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="#">Tampilkan</a>
-              <a class="dropdown-item" href="#">Ubah</a>
+              <a class="dropdown-item" href="<?=base_url()?>/auctioneer/goods">Tampilkan</a>
+              <a class="dropdown-item" href="">Ubah</a>
             </div>
           </div>
         </td>
