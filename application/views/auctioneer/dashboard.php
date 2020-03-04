@@ -22,8 +22,8 @@
     <div class="card mb-4">
       <div class="card-header" style="background: #fafafa;">
       	<div class="row">
-      	<div class="col"><i class="fas fa-table mr-1"></i>Barang Lelang</div>
-      	<div class="col text-right"><a href="<?= base_url()?>auctioneer/goods_create" class="btn btn-leon">Tambah Barang</a></div>
+      	<div class="col"><i class="fas fa-list"></i> Barang Lelang</div>
+      	<div class="col text-right"><a href="<?= base_url()?>auctioneer/goods_create" class="btn btn-leon"><i class="fas fa-notes-medical"></i> Tambah Barang</a></div>
       </div>
   </div>
       <div class="card-body">
@@ -47,8 +47,9 @@
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="<?=base_url()?>/auctioneer/goods">Tampilkan</a>
-              <a class="dropdown-item" href="">Ubah</a>
+              <a class="dropdown-item" href="<?=base_url()?>/auctioneer/goods"><i class="fas fa-eye"></i> Tampilkan</a>
+              <a class="dropdown-item" href=""><i class="fas fa-edit"></i> Ubah</a>
+              <a class="dropdown-item" href=""><i class="fas fa-trash-alt"></i> Hapus</a>
             </div>
           </div>
         </td>

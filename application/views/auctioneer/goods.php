@@ -16,7 +16,7 @@
   </head>
   <body>
   	<nav style="background: #1f6e70;" class="navbar navbar-dark py-1">
-	  <a class="navbar-brand" href="javascript:window.history.back()"><img src="<?=base_url()?>source/img/left.png"></a>
+	  <a class="navbar-brand" href="javascript:window.history.back()"><i class="fas fa-chevron-left"></i></a>
 	</nav>
     <section class="container-fluid">
       <div class="row justify-content-center">

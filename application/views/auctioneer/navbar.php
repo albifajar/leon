@@ -15,8 +15,8 @@
           </button>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Profile</a>
-            <a class="dropdown-item" href="#">Keluar</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-user-alt"></i> Profile</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Keluar</a>
           </div>
         </div>
       </div>

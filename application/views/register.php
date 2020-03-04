@@ -19,35 +19,35 @@
           <div class="mx-auto mx-md-0" style="width: 150px">
             <img src="<?=base_url();?>/source/logo.png?>" width="100%">
           </div>
-            <form class="mt-4">
+            <?= form_open("registration/process")?>
               <div class="form-group">
                 <label for="Pengguna">Nama Pengguna</label>
-                <input type="text" class="form-control" id="Pengguna" aria-describedby="emailHelp" >
+                <input type="text" name="username" class="form-control" id="Pengguna" aria-describedby="emailHelp" >
               </div>
               <div class="form-group">
                 <label for="Lengkap">Nama Lengkap</label>
-                <input type="text" class="form-control" id="Lengkap" aria-describedby="emailHelp" >
+                <input type="text" name="full_name" class="form-control" id="Lengkap" aria-describedby="emailHelp" >
               </div>
               <div class="form-group">
                 <label for="Telp">Nomor Telepon</label>
-                <input type="text" class="form-control" id="Telp" aria-describedby="emailHelp" >
+                <input type="text" name="phone_number" class="form-control" id="Telp" aria-describedby="emailHelp" >
               </div>
               <div class="form-group">
                 <label for="Pass">Kata Sandi</label>
-                <input type="password" id="Pass" class="form-control">
+                <input type="password" name="password" id="Pass" class="form-control">
               </div>
               <div class="form-group">
                 <label for="confrimPass">Konfiramasi Kata Sandi</label>
                 <input type="password" id="confrimPass" class="form-control">
               </div>
               <button type="submit" class="btn btn-leon">Daftar</button>
+            <?= form_close()?>
               <div class="text-right mt-3">
                 <a href="<?=base_url()?>login">Sudah punya akun</a>
               </div>
               <div class="d-block mt-2 text-right">
                 <a href="<?=base_url()?>">Kembali ke beranda</a>
               </div>
-            </form>
           </div>
         </div>
       <div class="col-md-6 d-none d-md-block" style="height: 100vh; background-image: url('<?=base_url()?>source/img/1.jpg'); background-repeat: no-repeat; background-size: 100%;position: fixed; right: 0px">

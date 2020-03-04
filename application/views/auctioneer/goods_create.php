@@ -9,18 +9,19 @@
     <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
     <!-- My Style -->
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <title>Create new data | LEON</title>
   </head>
   <body>
   	<nav style="background: #1f6e70;" class="navbar navbar-dark py-1">
-	  <a class="navbar-brand" href="<?=base_url()?>auctioneer"><img src="<?=base_url()?>source/img/left.png"></a>
+	  <a class="navbar-brand" href="<?=base_url()?>auctioneer"><i class="fas fa-chevron-left"></i></a>
 	</nav>
     <section class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-12 col-md-6 my-3" style="margin-top:20px">
           <div class="container">
 		    <div class="card mb-4">
-	    	  <div class="card-header" style="background: #fafafa;"><i class="fas fa-table mr-1"></i>Tambah Barang</div>
+	    	  <div class="card-header" style="background: #fafafa;"><i class="fas fa-notes-medical"></i> Tambah Barang</div>
 	      	  <div class="card-body">
 	            <form class="mt-4">
 	              <div class="form-group">

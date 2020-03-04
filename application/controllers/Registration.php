@@ -18,9 +18,18 @@ class Registration extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct(){
+		parent::__construct();
+		$this->load->helper('url');
+		$this->load->model('account_m','account');
+	}
 	public function index()
 	{
-		$this->load->helper('url');
+		$this->load->helper('form');
 		$this->load->view('register');
+	}
+	public function process()
+	{
+		$this->account->create($this->input->post());
 	}
 }

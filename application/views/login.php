@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
     <!-- My Style -->
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
+    <!-- Icheck -->    
+    <link rel="stylesheet" href="<?=base_url()?>source/vendor/icheck/skins/square/green.css">
     <title>Login | LEON</title>
   </head>
   <body>
@@ -17,20 +19,20 @@
         <div class="col-12 col-md-6 col-lg-5">
           <div class="kotak p-2" style="width: 100%">
           <div style="margin: auto; width: 150px">
-            <img src="<?=base_url();?>/source/logo.png?>" width="100%">
+            <img src="<?=base_url();?>source/logo.png?>" width="100%">
           </div>
           <div class="badan-kotak">
-            <form>
+            <?= form_open('login/process')?>
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Pengguna</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Kata Sandi</label>
-                <input type="password" class="form-control">
+                <input name="password" type="password" class="form-control">
               </div>
-              <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <div class="form-group">
+                <input name="remember" type="checkbox" class="form-check-input custom" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Ingatkan saya</label>
               </div>
               <div class="row">
@@ -41,7 +43,7 @@
               <a href="<?=base_url()?>registration" style="display: inline-block;padding: .375rem .75rem ">Buat akun</a></button>
             </div>
             </div>
-            </form>
+            <?= form_close()?>
           </div>
           </div>
         </div>
@@ -50,8 +52,18 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
     <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/icheck/icheck.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.custom').iCheck({
+          checkboxClass: 'icheckbox_square-green',
+          radioClass: 'iradio_square-green'
+        });
+      });
+    </script>
   </body>
 </html>
