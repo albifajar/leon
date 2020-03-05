@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
     <!-- My Style -->
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+
+    <script src="<?=base_url()?>source/vendor/validate.min.js"></script>
     <title>Registration | LEON</title>
   </head>
   <body>
@@ -19,10 +24,12 @@
           <div class="mx-auto mx-md-0" style="width: 150px">
             <img src="<?=base_url();?>/source/logo.png?>" width="100%">
           </div>
-            <?= form_open("registration/process")?>
+          <?=$msg?>
+            <?= form_open("registration/process", array("id"=>'main'))?>
               <div class="form-group">
                 <label for="Pengguna">Nama Pengguna</label>
                 <input type="text" name="username" class="form-control" id="Pengguna" aria-describedby="emailHelp" >
+                <div class="col-sm-5 messages"></div>
               </div>
               <div class="form-group">
                 <label for="Lengkap">Nama Lengkap</label>
@@ -34,13 +41,15 @@
               </div>
               <div class="form-group">
                 <label for="Pass">Kata Sandi</label>
-                <input type="password" name="password" id="Pass" class="form-control">
+                <input type="password" name="password" id="password" class="form-control">
+                <div class="col-sm-5 messages"></div>
               </div>
               <div class="form-group">
-                <label for="confrimPass">Konfiramasi Kata Sandi</label>
-                <input type="password" id="confrimPass" class="form-control">
+                <label for="cconfirm_password">Konfiramasi Kata Sandi</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                <div class="col-sm-5 messages"></div>
               </div>
-              <button type="submit" class="btn btn-leon">Daftar</button>
+            <button type="submit" class="btn btn-leon">Submit</button>
             <?= form_close()?>
               <div class="text-right mt-3">
                 <a href="<?=base_url()?>login">Sudah punya akun</a>
@@ -50,8 +59,8 @@
               </div>
           </div>
         </div>
-      <div class="col-md-6 d-none d-md-block" style="height: 100vh; background-image: url('<?=base_url()?>source/img/1.jpg'); background-repeat: no-repeat; background-size: 100%;position: fixed; right: 0px">
-      </div>
+<!--       <div class="col-md-6 d-none d-md-block" style="height: 100vh; background-image: url('<?=base_url()?>source/img/1.jpg'); background-repeat: no-repeat; background-size: 100%;position: fixed; right: 0px">
+      </div> -->
       </div>
     </section>
 
@@ -59,6 +68,8 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
+    <!--<script src="<?=base_url()?>source/dist/js/register.js">
+    </script>-->
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

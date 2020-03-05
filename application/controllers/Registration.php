@@ -26,10 +26,19 @@ class Registration extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper('form');
-		$this->load->view('register');
+
+		$send = array('msg'=>'');
+		if($msg = $this->input->get('msg')){
+			$send['msg'] = '<div class="alert alert-danger my-3" role="alert">'.$msg.'</div>';
+		}
+		$this->load->view('register', $send);
 	}
 	public function process()
 	{
-		$this->account->create($this->input->post());
+		if(($msg = $this->account->create($this->input->post())) === true){
+			redirect('login');
+		}else{
+			redirect('registration?msg='.$msg);
+		}
 	}
 }

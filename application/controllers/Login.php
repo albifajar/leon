@@ -17,6 +17,6 @@ class Login extends CI_Controller {
 	}
 	public function process()
 	{
-		$this->input->post());
+		$this->input->post();
 	}
 }
