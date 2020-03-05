@@ -9,6 +9,7 @@ class Login extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->model('account_m', 'account');
 	}
 	public function index()
 	{
@@ -17,6 +18,12 @@ class Login extends CI_Controller {
 	}
 	public function process()
 	{
-		$this->input->post();
+		$this->load->library('session');
+		if($level = $this->account->check_login($this->input->post())){
+
+		}else{
+			redirect('login');
+		}
+
 	}
 }

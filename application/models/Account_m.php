@@ -39,7 +39,18 @@ class Account_m extends CI_Model {
 			return "username yang anda masukan tidak tersedia";
 		}
 	}
-	public function check_login(){
+	public function check_login($data){
+		//inisialisasi
+		$username = $data['username'];
+		$password = $data['password'];
+		//get data petugas
+		$dat = $this->db->query("SELECT petugas.username as username, level.level as level, petugas.password as password FROM petugas INNER JOIN level ON petugas.id_level = level.id_level WHERE username = '$username'")->result_array()[0];
+		if(password_verify($password, $dat['password'])){
+			return $dat['level'];
+		}else{
+			return false;
+		}
+		return password_verify($password, $dat['password']);
 
 	}
 
