@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <title>Create new data | LEON</title>
+  <style type="text/css">
+    .messages{
+      font-size: 9pt;
+      margin-top: 6px;
+      color: #e43;
+    }
+  </style>
   </head>
   <body>
   	<nav style="background: #1f6e70;" class="navbar navbar-dark py-1">
@@ -21,24 +28,28 @@
         <div class="col-12 col-md-6 my-3" style="margin-top:20px">
           <div class="container">
 		    <div class="card mb-4">
-	    	  <div class="card-header" style="background: #fafafa;"><i class="fas fa-notes-medical"></i> Tambah Barang</div>
+	    	  <div class="card-header" style="background: #fafafa;"><i class="fas fa-notes1-medical"></i> Tambah Barang</div>
 	      	  <div class="card-body">
-	            <form class="mt-4">
+              <?= form_open("auctioneer/goods_create")?>
 	              <div class="form-group">
 	                <label for="barang">Nama Barang</label>
-	                <input type="text" class="form-control" id="barang" aria-describedby="emailHelp" >
+	                <input type="text" name="name_goods" class="form-control" id="barang" aria-describedby="emailHelp" >
+                <div class="messages"><?= form_error('name_goods');?></div>
 	              </div>
 	              <div class="form-group">
-	                <label for="harga">Harga Barang</label>
-	                <input type="text" class="form-control" id="harga" aria-describedby="emailHelp" >
+	                <label for="prince">Harga Barang</label>
+	                <input type="text" name="prince" class="form-control" id="prince" aria-describedby="emailHelp" >
+                <div class="messages"><?= form_error('prince');?></div>
 	              </div>
 	              <div class="form-group">
 	                <label for="Deskripsi">Deskripsi</label>
-	                <textarea id="Deskripsi" class="form-control"></textarea>
+	                <textarea id="Deskripsi" name="description" class="form-control"></textarea>
+                <div class="messages"><?= form_error('description');?></div>
+
 	              </div>
-	              <button type="submit" class="btn btn-leon">Tambahkan</button>
-	              <button type="submit" class="btn mt-sm-0 mt-3 btn-leon">Tambah & aktifkan</button>
-	            </form>
+	              <button type="submit" name="tambahkan" class="btn btn-leon">Tambahkan</button>
+	              <button type="submit" class="d-none btn mt-sm-0 mt-3 btn-leon">Tambah & aktifkan</button>
+            <?= form_close()?>
 	          </div>
 	        </div>
     	</div>
@@ -50,5 +61,9 @@
     <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/jquery.maskMoney.min.js"></script>
+    <script type="text/javascript">
+      $("#prince").maskMoney();
+    </script>
   </body>
 </html>

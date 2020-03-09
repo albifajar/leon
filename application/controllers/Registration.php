@@ -23,22 +23,34 @@ class Registration extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('account_m','account');
 	}
-	public function index()
-	{
-		$this->load->helper('form');
 
-		$send = array('msg'=>'');
-		if($msg = $this->input->get('msg')){
-			$send['msg'] = '<div class="alert alert-danger my-3" role="alert">'.$msg.'</div>';
-		}
-		$this->load->view('register', $send);
-	}
-	public function process()
-	{
-		if(($msg = $this->account->create($this->input->post())) === true){
-			redirect('login');
+	public function index(){
+
+		$this->load->helper('form');
+		if ($this->account->validation_registration() == FALSE) {
+			$this->load->view('register');
 		}else{
-			redirect('registration?msg='.$msg);
+			if($this->account->create_user($this->input->post())){
+				redirect('login');
+			}else{
+				redirect('registration');
+			}
 		}
 	}
+	
+
+        public function username_check($str)
+        {
+        	if($str !==  ""){
+                if ($this->account->username_checkout($str) == false)
+                {
+			    	$this->form_validation->set_message('username_check', '{field} tidak tersedia');
+                	return FALSE;
+                }else{
+                	return TRUE;
+                }
+            }else{
+            	return true;
+            }
+        }
 }

@@ -18,12 +18,29 @@ class User extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct(){
+		parent:: __construct();
+		$this->load->library('session');
+		$this->load->helper('url');
+	}
 	public function index()
 	{
 		$this->load->helper('url');
 		$this->load->view('user/header');
-		$this->load->view('user/navbar_active', array('on' => ''));
+		if($this->session->level !== 'user'){
+			$this->load->view('user/navbar_unactive', array('on'=>''));
+		}else{
+			$this->load->view('user/navbar_active', array('on'=>'','username' => $this->session->username));
+		}
 		$this->load->view('user/main');
 		$this->load->view('user/footer');
+	}
+	public function logout(){
+		$this->session->sess_destroy();
+		if($this->session->level){
+			redirect('user');
+		}else{
+			redirect('login');
+		}
 	}
 }

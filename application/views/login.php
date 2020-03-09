@@ -18,10 +18,11 @@
       <div class="row justify-content-center">
         <div class="col-12 col-md-6 col-lg-5">
           <div class="kotak p-2" style="width: 100%">
-          <div style="margin: auto; width: 150px">
-            <img src="<?=base_url();?>source/logo.png?>" width="100%">
+          <div style="margin: auto; width: 150px; padding: 10px 0px">
+            <img src="<?=base_url();?>source/logo-light.png?>" width="100%">
           </div>
           <div class="badan-kotak">
+            <?= $msg?>
             <?= form_open('login/process')?>
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Pengguna</label>

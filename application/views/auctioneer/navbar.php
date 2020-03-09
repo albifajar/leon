@@ -11,12 +11,12 @@
       <div class="nav-item mr-3">
         <div class="dropdown">
           <button class="btn dropdown-toggle text-white" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Nama Pengguna
+            <?=$this->session->username?>
           </button>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="#"><i class="fas fa-user-alt"></i> Profile</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+            <a class="dropdown-item" href="<?=base_url()?>auctioneer/logout"><i class="fas fa-sign-out-alt"></i> Keluar</a>
           </div>
         </div>
       </div>
