@@ -106,14 +106,13 @@ class Account_m extends CI_Model {
 	}
 	public function check_login($data){
 		//inisialisasi
-		var_dump($data);
 		$username = $data['username'];
 		$password = $data['password'];
 		//get data petugas
-		$dat = $this->db->query("SELECT petugas.username as username, level.level as level, petugas.password as password FROM petugas INNER JOIN level ON petugas.id_level = level.id_level WHERE username = '$username'")->result_array()[0];
+		$dat = $this->db->query("SELECT petugas.id_petugas as id, petugas.username as username, level.level as level, petugas.password as password FROM petugas INNER JOIN level ON petugas.id_level = level.id_level WHERE username = '$username'")->result_array()[0];
 		
 		if($this->db->affected_rows()<1){
-			$dat = $this->db->query("SELECT username, password FROM masyarakat WHERE username = '$username'")->result_array()[0];
+			$dat = $this->db->query("SELECT id_user as id, username, password FROM masyarakat WHERE username = '$username'")->result_array()[0];
 			$dat['level'] = 'user';
 		}
 		if($this->db->affected_rows()>0){

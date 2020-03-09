@@ -39,8 +39,9 @@ class Goods_m extends CI_Model {
                         return TRUE;
                 }
         }
-        // public function insert(){
-        // 	$this->db->insert     	
-        // }
+        public function insert(){
+       	$this->db->query('INSERT INTO tabel_a (nama, umur, alamat) OUTPUT INSERTED.'$nama', '$umur','$alamat' 
+      INTO tabel_b (nama, umur, alamat) VALUES ('$nama', '$umur','$alamat'))     	
+        }
 
 }
