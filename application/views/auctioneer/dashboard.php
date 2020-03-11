@@ -32,14 +32,19 @@
      <thead>
        <tr>
          <th>Nama Barang</th>
+         <th>Harga Awal</th>
+         <th>Harga Akhir</th>
          <th>Status</th>
          <th class="text-center" width="30px">Opsi</th>
        </tr>
      </thead>
      <tbody>
+      <?php foreach ($data as $row) :?>
        <tr>
-         <td>TEko</td>
-         <td>TEko</td>
+         <td><?=$row['nama_barang']?></td>
+         <td><?=$row['harga_awal']?></td>
+         <td><?=$row['harga_akhir']?></td>
+         <td><?=$row['status']?></td>
          <td class="text-center">         
           <div class="dropdown">
             <button class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
@@ -49,11 +54,12 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="<?=base_url()?>/auctioneer/goods"><i class="fas fa-eye"></i> Tampilkan</a>
               <a class="dropdown-item" href=""><i class="fas fa-edit"></i> Ubah</a>
-              <a class="dropdown-item" href=""><i class="fas fa-trash-alt"></i> Hapus</a>
+              <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods_delete/<?=$row['id']?>"><i class="fas fa-trash-alt"></i> Hapus</a>
             </div>
           </div>
         </td>
        </tr>
+      <?php endforeach?>
      </tbody>
    </table>
  </div>

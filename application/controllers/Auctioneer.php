@@ -18,18 +18,33 @@ class Auctioneer extends CI_Controller {
 			redirect('login');
 		}
 	}
-	public function index()
+	public function index($msg = false)
 	{
-		$this->load->view('auctioneer/dashboard');
+		$goods = $this->goods->get();
+		$this->load->view('auctioneer/dashboard', array('data' => $goods));
 	}
 	public function goods(){
 		$this->load->view('auctioneer/goods');
+	}
+	public function goods_delete($data=false){
+		if($data == false){
+			redirect('auctioneer');
+			return;
+		}
+		if($this->goods->delete($data)){
+			redirect('auctioneer');
+		}
+		// $this->
 	}
 	public function goods_create(){
 		//convert prince ke integer
 		 intval(implode('',explode(',', $this->input->post('prince'))));
 		if($this->goods->validation_create()){
-			$this->goods->insert();
+			if($this->goods->insert($this->input->post())){
+				redirect('auctioneer');
+			}else{
+				$this->load->view('auctioneer/goods_create');
+			}
 		}else{
 		$this->load->view('auctioneer/goods_create');
 		}
