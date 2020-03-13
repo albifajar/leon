@@ -23,8 +23,13 @@ class Auctioneer extends CI_Controller {
 		$goods = $this->goods->get();
 		$this->load->view('auctioneer/dashboard', array('data' => $goods));
 	}
-	public function goods(){
-		$this->load->view('auctioneer/goods');
+	public function goods($data=false){
+		if($data == false){
+			redirect('auctioneer');
+			return;
+		}else{
+		$this->load->view('auctioneer/goods');	
+		}
 	}
 	public function goods_delete($data=false){
 		if($data == false){

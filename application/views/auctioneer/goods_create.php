@@ -30,20 +30,29 @@
 		    <div class="card mb-4">
 	    	  <div class="card-header" style="background: #fafafa;"><i class="fas fa-notes1-medical"></i> Tambah Barang</div>
 	      	  <div class="card-body">
-              <?= form_open("auctioneer/goods_create")?>
+              <?= form_open_multipart("auctioneer/goods_create")?>
 	              <div class="form-group">
 	                <label for="barang">Nama Barang</label>
-	                <input type="text" name="name_goods" class="form-control" id="barang" aria-describedby="emailHelp" >
+	                <input type="text"  value="<?=set_value('name_goods')?>" name="name_goods" class="form-control" id="barang" aria-describedby="emailHelp" >
                 <div class="messages"><?= form_error('name_goods');?></div>
 	              </div>
+                <div class="form-group">
+                  <label for="prince">Gambar Barang</label>
+                  <input type="file" class="form-control" name="file" size="20" />
+                </div>
 	              <div class="form-group">
 	                <label for="prince">Harga Barang</label>
-	                <input type="text" name="prince" class="form-control" id="prince" aria-describedby="emailHelp" >
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">Rp</span>
+                    </div>
+	                  <input type="text" value="<?=set_value('prince')?>" name="prince" class="form-control" id="prince" aria-describedby="emailHelp" >
+                  </div>
                 <div class="messages"><?= form_error('prince');?></div>
 	              </div>
 	              <div class="form-group">
 	                <label for="Deskripsi">Deskripsi</label>
-	                <textarea id="Deskripsi" name="description" class="form-control"></textarea>
+	                <textarea id="Deskripsi" value="<?=set_value('description')?>" name="description" class="form-control"></textarea>
                 <div class="messages"><?= form_error('description');?></div>
 
 	              </div>

@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
     <!--Datatables-->
     <link rel="stylesheet" href="<?=base_url()?>source/vendor/datatables/css/jquery.dataTables.min.css">
+    <!--Sweetalert2-->
+    <link rel="stylesheet" href="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="<?=base_url()?>source/vendor/jquery-confirm/css/jquery-confirm.css">
+    <!--font awesome-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <title>LEON</title>
   </head>
@@ -52,9 +56,10 @@
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="<?=base_url()?>/auctioneer/goods"><i class="fas fa-eye"></i> Tampilkan</a>
+              <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods"><i class="fas fa-eye"></i> Tampilkan</a>
               <a class="dropdown-item" href=""><i class="fas fa-edit"></i> Ubah</a>
-              <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods_delete/<?=$row['id']?>"><i class="fas fa-trash-alt"></i> Hapus</a>
+              <?php $id=$row['id']?>
+              <button class="dropdown-item" href="" onclick="delConfirm('<?=base_url()?>auctioneer/goods_delete/<?=$id?>')"><i class="fas fa-trash-alt"></i> Hapus</button>
             </div>
           </div>
         </td>
@@ -74,9 +79,32 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
     <script src="<?=base_url()?>source/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/jquery-confirm/js/jquery-confirm.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+        function delConfirm(link){
+          let result = Swal.fire({
+          title: 'Apa kamu yakin?',
+          text: "Ini akan menghapus semua data yang ada",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Batal',
+        }).then((result) => {
+          if (result.value) {
+              location.href = link;
+          }else if (
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            return false;
+        }
+
+      });
+        }
       $(document).ready(function() {
          $('#dataTable').DataTable();
       });

@@ -40,6 +40,7 @@ class Goods_m extends CI_Model {
                 }
         }
         public function insert($data){
+            $this->do_upload();
             //set time zone
             date_default_timezone_set('Asia/Jakarta');
             $nama = $data['name_goods'];
@@ -71,11 +72,13 @@ class Goods_m extends CI_Model {
             $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_lelang WHERE id_petugas = '$id_petugas'  ORDER BY barang.waktu DESC")->result_array();
             for($i=0;$i<count($data);$i++){
                 $data[$i]['id'] = $this->encode_id($data[$i]['id']);
+                $data[$i]['harga_akhir'] = 'Rp. '.number_format($data[$i]['harga_akhir'],2,',','.');
+                $data[$i]['harga_awal'] = 'Rp. '.number_format($data[$i]['harga_awal'],2,',','.');
             }
             if($data){
                 return $data;
             }else{
-                return false;
+                return array();
             }
         }
         //encode id
@@ -96,6 +99,21 @@ class Goods_m extends CI_Model {
                 return true;
             }else{
                 return false;
+            }
+        }
+        public function do_upload(){
+
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            // $config['max_size']             = 100;
+            // $config['max_width']            = 1024;
+            // $config['max_height']           = 768;
+
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('file')){
+                var_dump(false);
+            }else{
+                var_dump(true);
             }
         }
 
