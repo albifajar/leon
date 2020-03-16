@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="<?=base_url()?>source/icon.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
@@ -19,7 +20,6 @@
     <title>LEON</title>
   </head>
   <body>
-
  <?php $this->load->view('auctioneer/navbar');?>
  <main>
   <div class="container mt-4">
@@ -42,6 +42,15 @@
          <th class="text-center" width="30px">Opsi</th>
        </tr>
      </thead>
+     <tfoot>
+       <tr>
+         <th>Nama Barang</th>
+         <th>Harga Awal</th>
+         <th>Harga Akhir</th>
+         <th>Status</th>
+         <th class="text-center" width="30px">Opsi</th>
+       </tr>
+     </tfoot>
      <tbody>
       <?php foreach ($data as $row) :?>
        <tr>
@@ -59,7 +68,7 @@
               <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods"><i class="fas fa-eye"></i> Tampilkan</a>
               <a class="dropdown-item" href=""><i class="fas fa-edit"></i> Ubah</a>
               <?php $id=$row['id']?>
-              <button class="dropdown-item" href="" onclick="delConfirm('<?=base_url()?>auctioneer/goods_delete/<?=$id?>')"><i class="fas fa-trash-alt"></i> Hapus</button>
+              <button class="dropdown-item" onclick="delConfirm('<?=base_url()?>auctioneer/goods_delete/<?=$id?>')"><i class="fas fa-trash-alt"></i> Hapus</button>
             </div>
           </div>
         </td>
@@ -80,31 +89,15 @@
     <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
     <script src="<?=base_url()?>source/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="<?=base_url()?>source/vendor/jquery-confirm/js/jquery-confirm.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        function delConfirm(link){
-          let result = Swal.fire({
-          title: 'Apa kamu yakin?',
-          text: "Ini akan menghapus semua data yang ada",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya',
-          cancelButtonText: 'Batal',
-        }).then((result) => {
-          if (result.value) {
-              location.href = link;
-          }else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            return false;
-        }
-
-      });
-        }
+    <script src="<?=base_url()?>source/dist/js/script.js"></script>
+    <script type="text/javascript">    
+  <?php if($msg = $this->session->massage):?>
+      successProsess('<?=$msg?>');
+  <?php endif;
+  $this->session->unset_userdata('massage');
+  ?>
       $(document).ready(function() {
          $('#dataTable').DataTable();
       });

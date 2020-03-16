@@ -5,6 +5,7 @@ class Account_m extends CI_Model {
 
 	public function __construct(){
 		$this->load->database();
+		$this->load->library('leon');
 	}
 	public function validation_registration(){
 		$this->load->library('form_validation');
@@ -125,6 +126,27 @@ class Account_m extends CI_Model {
 			return false;
 		}
 
+	}
+	public function get_accounts($form = false){
+		if($form !== false){
+			$data = $this->db->query("SELECT id_petugas as id,username FROM petugas WHERE id_level IN(SELECT id_level FROM level WHERE level = 'petugas')")
+					->result_array();
+			for($i=0;$i<count($data);$i++){
+				$data[$i]['id'] = $this->leon->encode_id($data[$i]['id']);
+			}
+			return $data;
+		}else{
+			error_log("masukan nilai");
+		}
+	}
+	public function del_account($id){
+		$id = $this->leon->decode_id($id);
+		$this->db->query("DELETE FROM petugas WHERE id_petugas = '$id'");
+		if($this->db->affected_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 }

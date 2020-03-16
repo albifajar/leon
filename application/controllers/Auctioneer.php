@@ -20,6 +20,7 @@ class Auctioneer extends CI_Controller {
 	}
 	public function index($msg = false)
 	{
+
 		$goods = $this->goods->get();
 		$this->load->view('auctioneer/dashboard', array('data' => $goods));
 	}
@@ -34,16 +35,17 @@ class Auctioneer extends CI_Controller {
 	public function goods_delete($data=false){
 		if($data == false){
 			redirect('auctioneer');
-			return;
 		}
 		if($this->goods->delete($data)){
+
+			$this->session->set_userdata(array('massage' => 'Data berhasil dihapus'));
 			redirect('auctioneer');
 		}
-		// $this->
 	}
 	public function goods_create(){
 		//convert prince ke integer
 		 intval(implode('',explode(',', $this->input->post('prince'))));
+
 		if($this->goods->validation_create()){
 			if($this->goods->insert($this->input->post())){
 				redirect('auctioneer');
@@ -51,6 +53,7 @@ class Auctioneer extends CI_Controller {
 				$this->load->view('auctioneer/goods_create');
 			}
 		}else{
+			
 		$this->load->view('auctioneer/goods_create');
 		}
 	}

@@ -17,9 +17,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                    <div class="sb-sidenav-footer">            
+                        <div style="margin: auto; width: 70px; margin-top: 8px">
+                            <img src="<?=base_url()?>source/logo-dark.png" width="100%"></div>
                     </div>
                 </nav>
             </div>

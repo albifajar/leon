@@ -5,6 +5,7 @@ class Goods_m extends CI_Model {
 
 	public function __construct(){
 		$this->load->database();
+        $this->load->library('leon');
 	}
 	public function validation_create(){
 		$this->load->library('form_validation');
@@ -17,12 +18,12 @@ class Goods_m extends CI_Model {
             array(
                 'field' => 'prince',
                 'label' => 'Harga Barang',
-                'rules' => 'required|max_length[50]|min_length[2]'
+                'rules' => 'required|max_length[20]|min_length[2]'
              ),
             array(
             	'field' => 'description',
             	'label' => 'Deskripsi',
-            	'rules' => 'required|max_length[20]|min_length[11]'
+            	'rules' => 'required|max_length[50]|min_length[3]'
             )
         );
                 //meng-costum massage pada rules
@@ -40,7 +41,7 @@ class Goods_m extends CI_Model {
                 }
         }
         public function insert($data){
-            $this->do_upload();
+            $nama_gambar = $this->do_upload();
             //set time zone
             date_default_timezone_set('Asia/Jakarta');
             $nama = $data['name_goods'];
@@ -58,7 +59,8 @@ class Goods_m extends CI_Model {
             //untuk status ada dua pilihan value yaitu 'buka' dan 'tutup'
             $status = 'tutup';
             //insert ke tabel lelang
-            $this->db->query("INSERT INTO lelang(id_lelang, id_barang, harga_akhir, id_petugas, status) VALUES ('', '$id_barang','$harga','$id_petugas','$status') ");
+            $this->db->query("INSERT INTO lelang(id_lelang, id_barang, harga_akhir, id_petugas, status) VALUES ('', '$id_barang','$harga','$id_petugas','$status');");
+            $this->db->query("INSERT INTO gambar_barang VALUES ('', '$id_barang', '$id_petugas', '$nama_gambar') ");
             
             if($this->db->affected_rows()>0){
                 return true;
@@ -69,9 +71,9 @@ class Goods_m extends CI_Model {
         public function get(){
             $id_petugas = $this->session->id;
             //get data lelang
-            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_lelang WHERE id_petugas = '$id_petugas'  ORDER BY barang.waktu DESC")->result_array();
+            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE id_petugas = '$id_petugas'  ORDER BY barang.waktu DESC")->result_array();
             for($i=0;$i<count($data);$i++){
-                $data[$i]['id'] = $this->encode_id($data[$i]['id']);
+                $data[$i]['id'] = $this->leon->encode_id($data[$i]['id']);
                 $data[$i]['harga_akhir'] = 'Rp. '.number_format($data[$i]['harga_akhir'],2,',','.');
                 $data[$i]['harga_awal'] = 'Rp. '.number_format($data[$i]['harga_awal'],2,',','.');
             }
@@ -81,19 +83,9 @@ class Goods_m extends CI_Model {
                 return array();
             }
         }
-        //encode id
-        private function encode_id($id){
-            $id = $id + 100000 + 72 + 84;
-            return base64_encode($id);
-        }
-        //decode
-        private function decode_id($id){
-            $id = intval(base64_decode($id));
-            return $id - 100000 - 72 - 84;
-        }
         public function delete($id){
             //get data lelang
-            $id = $this->decode_id($id);
+            $id = $this->leon->decode_id($id);
             $data = $this->db->delete('barang', array('id_barang' => $id));
             if($data){
                 return true;
@@ -102,18 +94,18 @@ class Goods_m extends CI_Model {
             }
         }
         public function do_upload(){
-
+            $this->load->library('session');
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'gif|jpg|png';
+            $config['file_name']             = $this->session->username.'_'.$this->leon->value_random(10);
             // $config['max_size']             = 100;
             // $config['max_width']            = 1024;
-            // $config['max_height']           = 768;
-
+            // $config['max_height']           = 768; 
             $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload('file')){
-                var_dump(false);
+               return false;
             }else{
-                var_dump(true);
+                return $this->upload->data('file_name');
             }
         }
 

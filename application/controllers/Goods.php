@@ -18,11 +18,20 @@ class Goods extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct(){
+		parent:: __construct();
+		$this->load->library('session');
+		$this->load->helper('url');
+	}
 	public function index()
 	{
 		$this->load->helper('url');
 		$this->load->view('user/header');
-		$this->load->view('user/navbar_active', array('on' => 'goods'));
+		if($this->session->level !== 'user'){
+			$this->load->view('user/navbar_unactive', array('on'=>'goods'));
+		}else{
+			$this->load->view('user/navbar_active', array('on'=>'goods','username' => $this->session->username));
+		}
 		$this->load->view('user/goods');
 		$this->load->view('user/footer');
 	}

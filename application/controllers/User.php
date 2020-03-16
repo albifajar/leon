@@ -22,18 +22,15 @@ class User extends CI_Controller {
 		parent:: __construct();
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->model('user_m','user');
 	}
 	public function index()
 	{
-		$this->load->helper('url');
-		$this->load->view('user/header');
-		if($this->session->level !== 'user'){
-			$this->load->view('user/navbar_unactive', array('on'=>''));
-		}else{
-			$this->load->view('user/navbar_active', array('on'=>'','username' => $this->session->username));
-		}
-		$this->load->view('user/main');
-		$this->load->view('user/footer');
+		$this->load->view('user/main',
+			array(
+				"data" => $this->user->get_goods()
+			)
+		);
 	}
 	public function logout(){
 		$this->session->sess_destroy();
@@ -42,5 +39,13 @@ class User extends CI_Controller {
 		}else{
 			redirect('login');
 		}
+	}
+	public function goods($id)
+	{;
+		$this->load->view('user/goods',
+			array(
+				'data' => $this->user->get_the_goods($id)
+			)
+		);
 	}
 }
