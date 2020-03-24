@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$this->load->library('url');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,6 +58,7 @@ p {
 </head>
 <body>
 	<div id="container">
+		<?=base_url()?>
 		<h1><?php echo $heading; ?></h1>
 		<?php echo $message; ?>
 	</div>

@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <title>LEON</title>
+    <style type="text/css">
+    	.judul-link{
+    		color: black;
+    	}
+    	.judul-link:hover{
+    		color: black;
+    	}
+    </style>
   </head>
   <body>
 <nav style="background: #1f6e70;" class="navbar navbar-expand-md navbar-dark py-2">
@@ -36,7 +44,7 @@
 	    </div>
 	      <div class="nav-item mr-3">
 	        <div class="dropdown">
-	          <button class="btn dropdown-toggle text-white" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          <button class="btn dropdown-toggle text-white text-capitalize" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	            <?=$this->session->username;?>
 	          </button>
 
@@ -53,24 +61,27 @@
 	<div class="row">
 		<?php foreach($data as $row):?>
 		<div class="col-12 col-md-6 col-lg-4 mt-5">
-			<a href="<?=base_url()?>user/goods/<?=$row['id']?>">
 			<div class="kotak" style="width: 18rem; margin: auto; display: block;">
-				<div class="cover-kotak">
-					<img src="<?=base_url()?>uploads/<?=$row['gambar']?>" width="100%;">
-				</div>
+				<a href="<?=base_url()?>user/goods/<?=$row['id']?>">
+					<div class="cover-kotak">
+						<img src="<?=base_url()?>uploads/<?=$row['gambar']?>" width="100%;">
+					</div>
+				</a>
 				<div class="badan-kotak">
-					<div class="judul"><?=$row['nama']?></div>
-					<div class="harga"><?=$row['harga']?></div>
+					<div class="judul">
+						<a class="judul-link" href="<?=base_url()?>user/goods/<?=$row['id']?>"><?=$row['nama']?>
+						</a>
+					</div>
+					<div class="harga mt-2"><?=$row['harga']?></div>
 				</div>
 			</div>
-			</a>
 		</div>
 	<?php endforeach;?>
 </section>
 <?php $this->load->view('user/footer')?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
   </body>

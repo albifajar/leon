@@ -24,6 +24,33 @@ function successProsess(msg){
   title: 'Sukses',
   text: msg,
   showConfirmButton: false,
-  timer: 1500
+  timer: 3000
 });
+}
+function errorProsess(msg){
+  Swal.fire({
+  icon: 'error',
+  title: 'Gagal',
+  text: msg,
+  showConfirmButton: false,
+  timer: 3000
+});
+}
+function alertToast(status, title){
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 7000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+});
+
+Toast.fire({
+  icon: status,
+  title: title
+})
 }

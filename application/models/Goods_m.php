@@ -23,7 +23,7 @@ class Goods_m extends CI_Model {
             array(
             	'field' => 'description',
             	'label' => 'Deskripsi',
-            	'rules' => 'required|max_length[50]|min_length[3]'
+            	'rules' => 'required|min_length[15]'
             )
         );
                 //meng-costum massage pada rules
@@ -68,10 +68,14 @@ class Goods_m extends CI_Model {
                 return false;
             }
         }
+        public function update($d){
+            $d;
+        }
         public function get(){
             $id_petugas = $this->session->id;
             //get data lelang
             $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE id_petugas = '$id_petugas'  ORDER BY barang.waktu DESC")->result_array();
+
             for($i=0;$i<count($data);$i++){
                 $data[$i]['id'] = $this->leon->encode_id($data[$i]['id']);
                 $data[$i]['harga_akhir'] = 'Rp. '.number_format($data[$i]['harga_akhir'],2,',','.');
@@ -83,6 +87,19 @@ class Goods_m extends CI_Model {
                 return array();
             }
         }
+        public function get_the($id){
+            $id = $this->leon->decode_id($id);
+            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status, barang.deskripsi AS deskripsi FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE lelang.id_barang = '$id'")->result_array()[0];
+            $data['harga_akhir'] = 'Rp. '.number_format($data['harga_akhir'],2,',','.');
+            $data['id'] = $this->leon->encode_id($data['id']);
+
+            return $data;
+        }
+        public function get_history_the($id){
+            $id = $this->leon->decode_id($id);
+            $data = $this->db->query("SELECT history_lelang.harga_penawaran as harga_penawaran, masyarakat.username as username, history_lelang.waktu as waktu, history_lelang.tanggal as tanggal FROM `history_lelang` INNER JOIN masyarakat ON history_lelang.id_user = masyarakat.id_user WHERE id_barang = '$id'")->result_array();
+            return $data;
+        }
         public function delete($id){
             //get data lelang
             $id = $this->leon->decode_id($id);
@@ -93,11 +110,17 @@ class Goods_m extends CI_Model {
                 return false;
             }
         }
+        public function set_status($d){
+            $d['i'] = $this->leon->decode_id($d['i']);
+            $this->db->set('status', $d['s']);
+            $this->db->where('id_barang', $d['i']);
+            $this->db->update('lelang');
+        }
         public function do_upload(){
             $this->load->library('session');
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'gif|jpg|png';
-            $config['file_name']             = $this->session->username.'_'.$this->leon->value_random(10);
+            $config['file_name']             = $this->leon->encode_id($this->session->id).'_'.$this->leon->value_random(10);
             // $config['max_size']             = 100;
             // $config['max_width']            = 1024;
             // $config['max_height']           = 768; 

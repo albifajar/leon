@@ -24,13 +24,37 @@ class Auctioneer extends CI_Controller {
 		$goods = $this->goods->get();
 		$this->load->view('auctioneer/dashboard', array('data' => $goods));
 	}
-	public function goods($data=false){
-		if($data == false){
-			redirect('auctioneer');
-			return;
-		}else{
-		$this->load->view('auctioneer/goods');	
+	public function goods($id=false){
+		$this->load->helper('form');
+		if($s = $this->input->post()){
+			$s = !isset($s['status'])? 'tutup':'buka';
+			$arr = ['s' => $s, 'i' => $id];
+			$this->goods->set_status($arr);
+			$this->session->set_userdata(array('massage' => 'Status telah di'.$arr['s']));
+			redirect('auctioneer/goods/'.$id);
+		}else{ 
+			if($id == false){
+				redirect('auctioneer');
+				return;
+			}else{
+				$arr = array(
+					'goods' => $this->goods->get_the($id),
+					'history' => $this->goods->get_history_the($id)
+				);
+			$this->load->view('auctioneer/goods', $arr);	
+			}
 		}
+	}
+	public function goodsPDF($id=false)
+	{
+		$mpdf = new \Mpdf\Mpdf();
+			$arr = array(
+				'goods' => $this->goods->get_the($id),
+				'history' => $this->goods->get_history_the($id)
+			);
+		$data = $this->load->view('auctioneer/goodsPDF', $arr, true);
+		$mpdf->WriteHTML($data);
+		$mpdf->Output("Report.pdf", \Mpdf\Output\Destination::INLINE);
 	}
 	public function goods_delete($data=false){
 		if($data == false){
@@ -41,6 +65,12 @@ class Auctioneer extends CI_Controller {
 			$this->session->set_userdata(array('massage' => 'Data berhasil dihapus'));
 			redirect('auctioneer');
 		}
+	}
+	public function goods_update($data=false){
+		if($data == false){
+			redirect('auctioneer');
+		}
+			$this->load->view('auctioneer/goods_update', array('goods' => $this->goods->get_the($data)));
 	}
 	public function goods_create(){
 		//convert prince ke integer

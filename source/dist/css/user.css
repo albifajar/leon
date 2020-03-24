@@ -23,10 +23,7 @@ body{
 	text-align: right;
 }
 .kotak .badan-kotak .harga:before{
-	content: 'Rp.'
-}
-.kotak .badan-kotak .harga:after{
-	content: '.00,-'
+	content: 'Rp. '
 }
 a > .kotak{
 	color: #000
@@ -53,4 +50,18 @@ a:hover > .kotak{
 .btn-leon:hover{
 	background-color: #0f5e60;
 	color: white;
+}
+.messages, form label.error{
+    font-size: 11pt;
+    margin-top: 6px;
+    color: #e43;
+}
+.ilustration{
+  height: 100vh;
+  background-image: url('../../img/01.png');
+  background-repeat: no-repeat; 
+  background-position: 0px 20vh;
+  background-size: 110% auto;
+  position: fixed; 
+  right: 0px
 }

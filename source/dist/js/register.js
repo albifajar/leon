@@ -3,18 +3,18 @@
     (function() {
       // Before using it we must add the parse and format functions
       // Here is a sample implementation using moment.js
-      validate.extend(validate.validators.datetime, {
-        // The value is guaranteed not to be null or undefined but otherwise it
-        // could be anything.
-        parse: function(value, options) {
-          return +moment.utc(value);
-        },
-        // Input is a unix timestamp
-        format: function(value, options) {
-          var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
-          return moment.utc(value).format(format);
-        }
-      });
+      // validate.extend(validate.validators.datetime, {
+      //   // The value is guaranteed not to be null or undefined but otherwise it
+      //   // could be anything.
+      //   parse: function(value, options) {
+      //     return +moment.utc(value);
+      //   },
+      //   // Input is a unix timestamp
+      //   format: function(value, options) {
+      //     var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+      //     return moment.utc(value).format(format);
+      //   }
+      // });
 
       // These are the constraints used to validate the form
       var constraints = {
@@ -47,9 +47,9 @@
           presence: true,
           // And it must be between 3 and 20 characters long
           length: {
-            minimum: 3,
+            minimum: 6,
             message: "terlalu pendek (min 6 katakter)",
-            maximum: 20,
+            maximum: 50,
             message: "terlalu panjang (max 50 katakter)",
           },
           format: {

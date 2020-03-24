@@ -57,7 +57,12 @@
          <td><?=$row['nama_barang']?></td>
          <td><?=$row['harga_awal']?></td>
          <td><?=$row['harga_akhir']?></td>
-         <td><?=$row['status']?></td>
+         <td>
+          <?php if(($s = $row['status']) == 'buka'):?>
+            <span class="text-success text-capitalize"><?=$s?></span>
+          <?php else:?>
+            <span class="text-danger text-capitalize"><?=$s?></span>
+          <?php endif;?></td>
          <td class="text-center">         
           <div class="dropdown">
             <button class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
@@ -65,8 +70,8 @@
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods"><i class="fas fa-eye"></i> Tampilkan</a>
-              <a class="dropdown-item" href=""><i class="fas fa-edit"></i> Ubah</a>
+              <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods/<?=$row['id']?>"><i class="fas fa-eye"></i> Tampilkan</a>
+              <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods_update/<?=$row['id']?>"><i class="fas fa-edit"></i> Ubah</a>
               <?php $id=$row['id']?>
               <button class="dropdown-item" onclick="delConfirm('<?=base_url()?>auctioneer/goods_delete/<?=$id?>')"><i class="fas fa-trash-alt"></i> Hapus</button>
             </div>
@@ -86,7 +91,7 @@
   </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
     <script src="<?=base_url()?>source/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>

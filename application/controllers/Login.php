@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');
 		//cek session
-//		$this->on_session();
+		$this->on_session();
 		$this->load->helper('url');
 		$this->load->model('account_m','account');
 	}
@@ -32,12 +32,7 @@ class Login extends CI_Controller {
 	{
 		$this->load->helper ('form');
 
-		$send = array("msg"=>"");
-		//kirim pesan kesalahan
-		if($msg = $this->input->get('msg')){
-			$send['msg'] = '<div class="alert alert-danger my-3" role="alert">'.$msg.'</div>';
-		}
-		$this->load->view('login', $send);
+		$this->load->view('login');
 	}
 	public function process()
 	{
@@ -57,7 +52,8 @@ class Login extends CI_Controller {
 				redirect('login');
 			}
 		}else{
-			redirect('login?msg=Username dan password salah');
+			$this->session->set_userdata(array('massage' => 'Username dan password salah'));
+			redirect('login');
 		}
 	}
 }

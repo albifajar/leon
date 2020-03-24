@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
     <!-- My Style -->
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
+    <!--Sweetalert2-->
+    <link rel="stylesheet" href="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.min.css">
     <!-- Icheck -->    
-    <link rel="stylesheet" href="<?=base_url()?>source/vendor/icheck/skins/square/green.css">
+    <link rel="stylesheet" href="<?=base_url()?>source/vendor/icheck/skins/square/blue.css">
     <title>Login | LEON</title>
   </head>
   <body>
@@ -22,16 +24,18 @@
           <div style="margin: auto; width: 150px; padding: 10px 0px">
             <img src="<?=base_url();?>source/logo-light.png?>" width="100%">
           </div>
-          <div class="badan-kotak">
-            <?= $msg?>
+          <div class="badan-kotak">    
             <?= form_open('login/process')?>
+            <?php if($msg = $this->session->massage):?>
+              <label class="error mb-2 text-center"><?=$msg?></label>
+            <?php endif;?>
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Pengguna</label>
-                <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                <input name="username" type="text" class="form-control"minlength="3" maxlength="50" required>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Kata Sandi</label>
-                <input name="password" type="password" class="form-control">
+                <input name="password" type="password"  minlength="8" maxlength="16" class="form-control" required>
               </div>
               <div class="form-group">
                 <input name="remember" type="checkbox" class="form-check-input custom" id="exampleCheck1">
@@ -42,7 +46,7 @@
               <button type="submit" class="btn btn-leon">Masuk</button>
             </div>
             <div class="col-6" style="text-align: right;">
-              <a href="<?=base_url()?>registration" style="display: inline-block;padding: .375rem .75rem ">Buat akun</a></button>
+              <a href="<?=base_url()?>registration" style="display: inline-block;padding: .375rem .75rem ">Buat akun</a>
             </div>
             </div>
             <?= form_close()?>
@@ -55,15 +59,20 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    <script src="<?=base_url()?>source/vendor/jquery-slim.min.js"></script>
-    <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/jquery-validation-1.19.1/jquery.validate.min.js">
+    </script>
+    <script src="<?=base_url()?>source/vendor/jquery-validation-1.19.1/localization/messages_id.min.js">
+    </script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script src="<?=base_url()?>source/vendor/icheck/icheck.min.js"></script>
+    <script src="<?=base_url()?>source/dist/js/script.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+       $("form").validate();
         $('.custom').iCheck({
-          checkboxClass: 'icheckbox_square-green',
-          radioClass: 'iradio_square-green'
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue'
         });
       });
     </script>
