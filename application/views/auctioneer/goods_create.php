@@ -53,7 +53,7 @@
           </div>
           <div class="form-group">
            <label for="Deskripsi">Deskripsi</label>
-           <textarea id="Deskripsi" name="description" class="form-control"><?= form_error('description');?></textarea>
+           <textarea id="Deskripsi" name="description" class="form-control"><?= set_value('description');?></textarea>
            <div class="messages"><?= form_error('description');?></div>
 
          </div>
@@ -71,9 +71,13 @@
 <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
 <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
 <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-<script src="<?=base_url()?>source/vendor/jquery.maskMoney.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/cleave.min.js"></script>
 <script type="text/javascript">
-  $("#prince").maskMoney();
+  
+var cleave = new Cleave($("#prince"), {
+    numeral: true,
+    numeralThousandsGroupStyle: 'thousand'
+});
 </script>
 </body>
 </html>

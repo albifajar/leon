@@ -72,29 +72,29 @@
            <div class="form-group">
              <label for="barang">Nama Barang</label>
              <div class="form-control text-capitalize"><?= $goods['nama_barang']?></div>
-         </div>
-         <div class="form-group">
-           <label for="harga">Harga Akhir</label>
-           <div class="form-control"><?= $goods['harga_akhir']?></div>
-         </div>
-         <div class="form-group">
-           <label for="Deskripsi">Deskripsi</label>
-           <div class="form-control" style="height: 100px"><?= $goods['deskripsi']?></div>
+           </div>
+           <div class="form-group">
+             <label for="harga">Harga Akhir</label>
+             <div class="form-control"><?= $goods['harga_akhir']?></div>
+           </div>
+           <div class="form-group">
+             <label for="Deskripsi">Deskripsi</label>
+             <div class="form-control" style="height: 100px"><?= $goods['deskripsi']?></div>
+           </div>
          </div>
        </div>
      </div>
    </div>
- </div>
-</section>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
-<script src="<?=base_url()?>source/vendor/datatables/js/jquery.dataTables.min.js"></script>
-<script src="<?=base_url()?>source/vendor/popper.min.js"></script>
-<script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-<script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="<?=base_url()?>source/dist/js/script.js"></script>
-<script type="text/javascript">    
+ </section>
+ <!-- Optional JavaScript -->
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
+ <script src="<?=base_url()?>source/vendor/datatables/js/jquery.dataTables.min.js"></script>
+ <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
+ <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+ <script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+ <script src="<?=base_url()?>source/dist/js/script.js"></script>
+ <script type="text/javascript">    
   <?php if($msg = $this->session->massage):?>
     successProsess('<?=$msg?>');
   <?php endif;

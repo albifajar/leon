@@ -49,7 +49,7 @@ class User extends CI_Controller {
 			return;
 		}
 		if($prince = $this->input->post('prince')){
-			$u_prince = intval(implode('',explode('.', explode(',', $prince)[0])));
+			$u_prince = intval(implode('',explode(',', $prince)));
 			$prince = intval(implode('',explode('.', explode(',', $the_goods['harga'])[0])));
 			if($u_prince > $prince){
 				$data = array(

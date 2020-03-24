@@ -25,9 +25,9 @@
   <div class="container mt-4">
     <div class="card mb-4">
       <div class="card-header" style="background: #fafafa;">
-      	<div class="row">
-      	<div class="col"><i class="fas fa-list"></i> Barang Lelang</div>
-      	<div class="col text-right"><a href="<?= base_url()?>auctioneer/goods_create" class="btn btn-leon"><i class="fas fa-notes-medical"></i> Tambah Barang</a></div>
+        <div class ="row">
+        <div class ="col"><i class="fas fa-list"></i> Barang Lelang</div>
+        <div class ="col text-right"><a href="<?= base_url()?>auctioneer/goods_create" class="btn btn-leon"><i class="fas fa-notes-medical"></i> Tambah Barang</a></div>
       </div>
   </div>
       <div class="card-body">
@@ -71,9 +71,9 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods/<?=$row['id']?>"><i class="fas fa-eye"></i> Tampilkan</a>
-              <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods_update/<?=$row['id']?>"><i class="fas fa-edit"></i> Ubah</a>
-              <?php $id=$row['id']?>
-              <button class="dropdown-item" onclick="delConfirm('<?=base_url()?>auctioneer/goods_delete/<?=$id?>')"><i class="fas fa-trash-alt"></i> Hapus</button>
+              <a class ="dropdown-item" href="<?=base_url()?>auctioneer/goods_update/<?=$row['id']?>"><i class="fas fa-edit"></i> Ubah</a>
+              <?php $id =$row['id']?>
+              <button class ="dropdown-item" onclick="delConfirm('<?=base_url()?>auctioneer/goods_delete/<?=$id?>')"><i class="fas fa-trash-alt"></i> Hapus</button>
             </div>
           </div>
         </td>

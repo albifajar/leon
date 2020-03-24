@@ -92,7 +92,7 @@
     <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-    <script src="<?=base_url()?>source/vendor/jquery.maskMoney.min.js"></script>
+    <script src="<?=base_url()?>source/vendor/cleave.min.js"></script>
     <script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="<?=base_url()?>source/dist/js/script.js"></script>
     <script type="text/javascript">
@@ -102,11 +102,20 @@
           alertToast('error', 'Harga gagal di ajukan');
       <?php endif;  $this->session->unset_userdata('status');?>
 
-      $("#prince").maskMoney({allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+
+
+var cleave = new Cleave($("#prince"), {
+    numeral: true,
+    numeralThousandsGroupStyle: 'thousand'
+});
+
+
+
+      // $("#prince").maskMoney({allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
       $('form').submit(function(){
 
       let uang = parseInt($('span.uang').text().split(',')[0].split('.').join(""));
-      let uangInput = parseInt($('input').val().split(',')[0].split('.').join(""));
+      let uangInput = parseInt($('input').val().split(',').join(""));
   if(uang < uangInput){
     return true;
   }else{
