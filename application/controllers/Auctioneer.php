@@ -41,6 +41,8 @@ class Auctioneer extends CI_Controller {
 					'goods' => $this->goods->get_the($id),
 					'history' => $this->goods->get_history_the($id)
 				);
+
+            $arr['goods']['harga_akhir'] = 'Rp. '.number_format($arr['goods']['harga_akhir'],2,',','.');
 			$this->load->view('auctioneer/goods', $arr);	
 			}
 		}
@@ -70,6 +72,14 @@ class Auctioneer extends CI_Controller {
 		if($data == false){
 			redirect('auctioneer');
 		}
+		if($d = $this->input->post()){
+
+			if($this->goods->update($a)){
+			$this->session->set_userdata(array('massage' => 'Data berhasil diubah'));
+				redirect('auctioneer/goods_update'. $data);
+			}
+		}
+		$this->load->helper('form');
 			$this->load->view('auctioneer/goods_update', array('goods' => $this->goods->get_the($data)));
 	}
 	public function goods_create(){

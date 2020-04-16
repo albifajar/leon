@@ -63,28 +63,32 @@
    <a class="navbar-brand" href="javascript:window.history.back()"><i class="fas fa-chevron-left"></i></a>
  </nav>
  <section class="conta\iner-fluid">
+  <?= form_open('auctioneer/goods_update/'.$goods['id']);?>
   <div class="row justify-content-center">
-    <div class="col-12 col-md-8 my-3" style="margin-top:20px">
+    <div class="col-12 col-md-6 my-3" style="margin-top:20px">
       <div class="container">
         <div class="card mb-4">
           <div class="card-header" style="background: #fafafa;">Barang</div>
           <div class="card-body">
            <div class="form-group">
              <label for="barang">Nama Barang</label>
-             <div class="form-control text-capitalize"><?= $goods['nama_barang']?></div>
+             <input name="name_goods" class="form-control text-capitalize" id="name" value="<?= $goods['nama_barang']?>">
            </div>
            <div class="form-group">
-             <label for="harga">Harga Akhir</label>
-             <div class="form-control"><?= $goods['harga_akhir']?></div>
+             <label for="prince">Harga Barang</label>
+             <input name="prince" class="form-control" id="prince" value="<?= $goods['harga_awal']?>">
            </div>
            <div class="form-group">
              <label for="Deskripsi">Deskripsi</label>
-             <div class="form-control" style="height: 100px"><?= $goods['deskripsi']?></div>
+             <textarea name="description" class="form-control" id="description"><?= $goods['deskripsi']?></textarea>
            </div>
+         <button type="submit" name="tambahkan" class="btn btn-leon">Selesai</button>
          </div>
        </div>
      </div>
    </div>
+ </div>
+ <?= form_close();?>
  </section>
  <!-- Optional JavaScript -->
  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -94,7 +98,14 @@
  <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
  <script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
  <script src="<?=base_url()?>source/dist/js/script.js"></script>
- <script type="text/javascript">    
+
+    <script src="<?=base_url()?>source/vendor/cleave.min.js"></script>
+<script type="text/javascript">
+  
+var cleave = new Cleave($("#prince"), {
+    numeral: true,
+    numeralThousandsGroupStyle: 'thousand'
+});
   <?php if($msg = $this->session->massage):?>
     successProsess('<?=$msg?>');
   <?php endif;
@@ -103,9 +114,12 @@
   $(document).ready(function() {
    $('#dataTable').DataTable();	
  });
+  const GName = "<?=$goods['nama_barang']?>",
+        GPrince = "<?=$goods['harga_akhir']?>",
+        GDeskrip = "<?= $goods['deskripsi']?>";
   $('form').submit(function(e){
 	//	  return confirm('adsa');
-  if($('#status').text() !== $('#status-conf').attr('data-defst')){
+  if($('#name').val() !== GName || $('#description').val() !== GDeskrip || $('#prince').val().split(',').join('') !== GPrince){
     e.preventDefault();
     Swal.fire({
       title: 'Apa kamu yakin?',
@@ -122,11 +136,8 @@
      }
 
    });
-  }else{
-    e.preventDefault();
   }
 });
-  $('#status-conf').click(function(){ let s = $('#status-conf:checked').val(); if(s == "on"){  $('span#status').html('<span class="text-success text-capitalize" style="margin-left: 6px;">buka</span>')} if(s == undefined){  $('span#status').html('<span class="text-danger text-capitalize">tutup</span>')}})
 </script>
 </body>
 </html>

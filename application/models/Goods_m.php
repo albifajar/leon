@@ -90,7 +90,6 @@ class Goods_m extends CI_Model {
         public function get_the($id){
             $id = $this->leon->decode_id($id);
             $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status, barang.deskripsi AS deskripsi FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE lelang.id_barang = '$id'")->result_array()[0];
-            $data['harga_akhir'] = 'Rp. '.number_format($data['harga_akhir'],2,',','.');
             $data['id'] = $this->leon->encode_id($data['id']);
 
             return $data;

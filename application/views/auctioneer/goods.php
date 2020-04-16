@@ -65,7 +65,7 @@
 	  	<a href="<?=base_url('auctioneer/goodsPDF/').$goods['id']?>" class="btn btn-leon"><i class="fas fa-file-pdf"></i> Report</a>
 	  </div>
 	</nav>
-    <section class="conta\iner-fluid">
+    <section class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-12 col-md-8 my-3" style="margin-top:20px">
           <div class="container">

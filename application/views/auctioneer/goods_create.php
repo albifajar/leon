@@ -57,8 +57,8 @@
            <div class="messages"><?= form_error('description');?></div>
 
          </div>
-         <button type="submit" name="tambahkan" class="btn btn-leon">Tambahkan</button>
-         <button type="submit" class="d-none btn mt-sm-0 mt-3 btn-leon">Tambah & aktifkan</button>
+         <button type="submit" name="tambahkan" class="btn btn-leon">Selesai</button>
+         <button type="submit" class="d-none btn mt-sm-0 mt-3 btn-leon">Aktifkan</button>
          <?= form_close()?>
        </div>
      </div>
