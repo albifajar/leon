@@ -73,4 +73,7 @@ class User extends CI_Controller {
 			);
 		}
 	}
+	public function test(){
+		echo json_encode($this->user->get_goods());
+	}
 }

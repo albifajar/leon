@@ -58,25 +58,8 @@
 	<?php endif;?>
 </nav>
 <section class="container mt-4">
-	<div class="row">
-		<?php foreach($data as $row):?>
-		<div class="col-12 col-md-6 col-lg-4 mt-5">
-			<div class="kotak" style="width: 18rem; margin: auto; display: block;">
-				<a href="<?=base_url()?>user/goods/<?=$row['id']?>">
-					<div class="cover-kotak">
-						<img src="<?=base_url()?>uploads/<?=$row['gambar']?>" width="100%;">
-					</div>
-				</a>
-				<div class="badan-kotak">
-					<div class="judul">
-						<a class="judul-link" href="<?=base_url()?>user/goods/<?=$row['id']?>"><?=$row['nama']?>
-						</a>
-					</div>
-					<div class="harga mt-2"><?=$row['harga']?></div>
-				</div>
-			</div>
-		</div>
-	<?php endforeach;?>
+	<div class="row" id="items">
+	</div>
 </section>
 <?php $this->load->view('user/footer')?>
     <!-- Optional JavaScript -->
@@ -84,5 +67,24 @@
     <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+    loopdata();
+
+    function loopdata() {
+       setTimeout(loopdata,10000);
+       $.ajax({
+       		url: "http://127.0.0.1/leon/user/test", success: function(result){
+      var d = JSON.parse(result);
+      let html = '';
+
+      for(var i = 0; i < d.length; i++){
+      	html += '<div class="col-12 col-md-6 col-lg-4 mt-5"><div class="kotak" style="width: 18rem; margin: auto; display: block;"><a href="<?=base_url()?>user/goods/'+d[i].id+'"><div class="cover-kotak"><img src="<?=base_url()?>uploads/'+d[i].gambar+'" width="100%;" alt="'+d[i].nama+'"></div></a><div class="badan-kotak"><div class="judul"><a class="judul-link" href="<?=base_url()?>user/goods/'+d[i].id+'">'+d[i].nama+'</a></div><div class="harga mt-2">'+d[i].harga+'</div></div></div></div>'
+      }
+      $("#items").html(html);
+    }});
+    }
+});
+    </script>
   </body>
 </html>

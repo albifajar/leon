@@ -18,7 +18,7 @@ class Leon {
 		for($i=0;$i<$angka;$i++){
 
 			$post = rand(0, strlen($karakter)-1);
-			$string .= $karakter{$post};
+			$string .= $karakter[$post];
 		}
 		return $string;
 	}

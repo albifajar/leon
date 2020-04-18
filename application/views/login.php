@@ -17,7 +17,7 @@
     <title>Login | LEON</title>
   </head>
   <body>
-    <section class="container" style="margin-top:70px">
+    <section class="container" style="position: relative; top: 20vh">
       <div class="row justify-content-center">
         <div class="col-12 col-md-6 col-lg-5">
           <div class="kotak p-2" style="width: 100%">
