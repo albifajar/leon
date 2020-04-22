@@ -77,9 +77,8 @@
        		url: "http://127.0.0.1/leon/user/test", success: function(result){
       var d = JSON.parse(result);
       let html = '';
-
       for(var i = 0; i < d.length; i++){
-      	html += '<div class="col-12 col-md-6 col-lg-4 mt-5"><div class="kotak" style="width: 18rem; margin: auto; display: block;"><a href="<?=base_url()?>user/goods/'+d[i].id+'"><div class="cover-kotak"><img src="<?=base_url()?>uploads/'+d[i].gambar+'" width="100%;" alt="'+d[i].nama+'"></div></a><div class="badan-kotak"><div class="judul"><a class="judul-link" href="<?=base_url()?>user/goods/'+d[i].id+'">'+d[i].nama+'</a></div><div class="harga mt-2">'+d[i].harga+'</div></div></div></div>'
+      	html += '<div class="col-12 col-md-6 col-lg-4 mt-5"><div class="kotak" style="width: 18rem; margin: auto; display: block;"><a href="<?=base_url()?>user/goods/'+d[i].id+'"><div class="cover-kotak text-center"><img src="<?=base_url()?>uploads/'+d[i].gambar+'" width="100%;" alt="'+d[i].nama+'"></div></a><div class="badan-kotak"><div class="judul"><a class="judul-link" href="<?=base_url()?>user/goods/'+d[i].id+'">'+d[i].nama+'</a></div><div class="harga mt-2">'+d[i].harga+'</div></div></div></div>'
       }
       $("#items").html(html);
     }});
