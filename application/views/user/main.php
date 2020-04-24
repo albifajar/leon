@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
     <!-- My Style -->
     <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
+    <!-- vue js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <title>LEON</title>
     <style type="text/css">
@@ -59,6 +61,21 @@
 </nav>
 <section class="container mt-4">
 	<div class="row" id="items">
+    <div class="col-12 col-md-6 col-lg-4 mt-5" v-for="item in items">
+      <div class="kotak" style="width: 18rem; margin: auto; display: block;">
+        <a v-bind:href="'<?=base_url()?>user/goods/'+item.id">
+          <div class="cover-kotak text-center">
+            <img v-bind:src="'<?=base_url()?>uploads/'+item.gambar" width="100%;" v-bind:alt="item.nama">
+          </div>
+        </a>
+        <div class="badan-kotak">
+          <div class="judul">
+            <a class="judul-link" v-bind:href="'<?=base_url()?>user/goods/'+item.id">{{ item.nama }}</a>
+          </div>
+          <div class="harga mt-2">{{ item.harga }}</div>
+        </div>
+      </div>
+    </div>
 	</div>
 </section>
 <?php $this->load->view('user/footer')?>
@@ -68,22 +85,25 @@
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-    	$(function() {
-    loopdata();
+    var apps;
+    $(function() {
+        loopdata();
 
-    function loopdata() {
-       setTimeout(loopdata,10000);
-       $.ajax({
-       		url: "http://127.0.0.1/leon/user/test", success: function(result){
-      var d = JSON.parse(result);
-      let html = '';
-      for(var i = 0; i < d.length; i++){
-      	html += '<div class="col-12 col-md-6 col-lg-4 mt-5"><div class="kotak" style="width: 18rem; margin: auto; display: block;"><a href="<?=base_url()?>user/goods/'+d[i].id+'"><div class="cover-kotak text-center"><img src="<?=base_url()?>uploads/'+d[i].gambar+'" width="100%;" alt="'+d[i].nama+'"></div></a><div class="badan-kotak"><div class="judul"><a class="judul-link" href="<?=base_url()?>user/goods/'+d[i].id+'">'+d[i].nama+'</a></div><div class="harga mt-2">'+d[i].harga+'</div></div></div></div>'
-      }
-      $("#items").html(html);
-    }});
-    }
-});
+        function loopdata() {
+            setTimeout(loopdata, 10000);
+            $.ajax({
+                url: "http://127.0.0.1/leon/user/get_goods",
+                success: function(result) {
+                    apps = new Vue({
+                        el: '#items',
+                        data: {
+                            items: JSON.parse(result)
+                        }
+                    });
+                }
+            });
+        }
+    });
     </script>
   </body>
 </html>

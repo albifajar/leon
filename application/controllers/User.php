@@ -73,7 +73,11 @@ class User extends CI_Controller {
 			);
 		}
 	}
-	public function test(){
-		echo json_encode($this->user->get_goods());
+	public function get_goods($id = false){
+		if($id !== false){
+			echo json_encode($this->user->get_the_goods($id));
+		}else{
+			echo json_encode($this->user->get_goods());
+		}
 	}
 }
