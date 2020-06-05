@@ -21,10 +21,10 @@
     <nav style="background: #1f6e70;" class="navbar sticky-top navbar-dark py-md-3 py-1">
       <a class="navbar-brand" href="javascript:window.history.back()"><i class="fas fa-chevron-left"></i></a>
     </nav>
-    <section class="container mt-md-4 mt-2"  id="item">
+    <section class="container mt-md-4 mt-2">
       <div class="row justify-content-center">
         <div class="col-12 col-md-8 my-3" style="margin-top:20px">
-          <div class="card mb-4">
+          <div class="card mb-4" id="item">
             <div class="cover-kotak" style="max-height: 350px; overflow-y: hidden;">
               <img v-bind:src="gambar" width="100%;" style="margin-top: -50px">
             </div>
@@ -46,7 +46,10 @@
                   <a href="<?=base_url()?>registration">Daftar</a>
                   </div>
                 <?php else:?>
-                <form class="mt-5" method="post">
+                <?php endif?>
+                </div>
+              </div>
+                <form class="mt-2" method="post">
                   <div class="form-group">
                     <label for="Deskripsi" style="font-weight: 700px">Ajukan harga</label>
                     <div class="input-group mb-3">
@@ -58,9 +61,7 @@
                       <button class="btn btn-leon" type="submit" id="button-addon2">Ajukan</button>
                     </div>
                   </div>
-                </div>
-                <?php endif?>
-              </div>
+                </form>
             </div>
           </div>
         </section>
@@ -73,6 +74,29 @@
         <script src="<?=base_url()?>source/vendor/cleave.min.js"></script>
         <script src="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.all.min.js"></script>
         <script src="<?=base_url()?>source/dist/js/script.js"></script>
+        <script type="text/javascript">
+        <?php if($this->session->status == 'success'):?>
+        alertToast('success', 'Harga berhasil di ajukan');
+        <?php elseif($this->session->status == 'error'):?>
+        alertToast('error', 'Harga gagal di ajukan');
+        <?php endif;  $this->session->unset_userdata('status');?>
+        
+        var cleave = new Cleave($("#prince"), {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+        });
+
+        $('form').submit(function(){
+        let uang = parseInt($('span.uang').text().split(',')[0].split('.').join(""));
+        let uangInput = parseInt($('input').val().split(',').join(""));
+        if(uang < uangInput){
+        return true;
+        }else{
+        alertToast('warning', 'Harga yang di ajukan harus lebih tinggi');
+        return false;
+        }
+        })
+        </script>
         
         <script type="text/javascript">
 
@@ -99,27 +123,6 @@
         });
 
 
-        </script>
-        <script type="text/javascript">
-        <?php if($this->session->status == 'success'):?>
-        alertToast('success', 'Harga berhasil di ajukan');
-        <?php elseif($this->session->status == 'error'):?>
-        alertToast('error', 'Harga gagal di ajukan');
-        <?php endif;  $this->session->unset_userdata('status');?>
-        var cleave = new Cleave($("#prince"), {
-        numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
-        });
-        $('form').submit(function(){
-        let uang = parseInt($('span.uang').text().split(',')[0].split('.').join(""));
-        let uangInput = parseInt($('input').val().split(',').join(""));
-        if(uang < uangInput){
-        return true;
-        }else{
-        alertToast('warning', 'Harga yang di ajukan harus lebih tinggi');
-        return false;
-        }
-        })
         </script>
       </body>
     </html>

@@ -15,6 +15,7 @@ class Admin extends CI_Controller {
 		$this->load->helper('url');
 		//model account
 		$this->load->model('account_m', 'account');
+		$this->load->model('goods_m', 'goods');
 	}
 	private function on_session(){
 		//cek session
@@ -27,6 +28,32 @@ class Admin extends CI_Controller {
 		//main of admin area
 		$this->load->view('admin/header');
 		$this->load->view('admin/dashboard');
+	}
+
+	public function categories(){
+		
+		$data['cats'] = $this->goods->categories();
+		$this->load->view('admin/categories/table', $data);
+
+	}
+
+	public function category_create(){
+		$this->load->helper('form');
+		if($this->input->post()){
+			if($this->goods->category_create($this->input->post())>0){
+				redirect('admin/categories');
+			}
+		}else{
+			$this->load->view('admin/categories/create');
+		}
+	}
+
+	public function category_delete($id=false){
+		if($id !== false){
+			$this->goods->category_delete($id);
+		}else{
+			redirect('admin/categories');
+		}
 	}
 
 	public function auctioneer(){

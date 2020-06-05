@@ -130,5 +130,27 @@ class Goods_m extends CI_Model {
                 return $this->upload->data('file_name');
             }
         }
+        public function category_create($d){
+            $this->db->insert('barang_kategori', $d);
+            return $this->db->affected_rows();
+        }
+        public function category_delete($id){
+            $id = $this->leon->decode_id($id);
+
+            $data = $this->db->delete('barang_kategori', array('id' => $id));
+            if($data){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function categories(){
+           $data = $this->db->get('barang_kategori')->result_array();
+
+            for($i=0;$i<count($data);$i++){
+                $data[$i]['id'] = $this->leon->encode_id($data[$i]['id']);
+            }
+            return $data;
+        }
 
 }

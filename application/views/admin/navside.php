@@ -6,12 +6,21 @@
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard</a
                             >
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Barang" aria-expanded="false" aria-controls="Barang"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Barang
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="Barang" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="<?=base_url()?>admin/auctioneer">Tampilkan</a>
+                                <a class="nav-link" href="<?=base_url()?>admin/categories">Kategori</a></nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pelelang" aria-expanded="false" aria-controls="Pelelang"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Pelelang
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                             ></a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <div class="collapse" id="Pelelang" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="<?=base_url()?>admin/auctioneer">Tampilkan</a>
                                 <a class="nav-link" href="<?=base_url()?>admin/registration_auctioneer">Tambah akun</a></nav>
                             </div>

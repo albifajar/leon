@@ -64,7 +64,6 @@ class User extends CI_Controller {
 				$this->session->set_userdata(array('status' => 'error'));
 				redirect('user/goods/'.$id);
 			}
-
 		}else{
 			$this->load->view('user/goods',
 				array(
@@ -72,6 +71,8 @@ class User extends CI_Controller {
 				)
 			);
 		}
+
+			var_dump(array_diff($this->user->get_iduser_in_good($id), [$this->session->id]));
 	}
 	public function get_goods($id = false){
 		if($id !== false){

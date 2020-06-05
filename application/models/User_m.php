@@ -39,6 +39,14 @@ class User_m extends CI_Model {
             $tanggal = date('Y-m-d');
             $waktu = date('H:i:s');
         $this->db->query("INSERT INTO history_lelang VALUES ('','$id_lelang', '$id_barang', '$id_user', '$harga', '$tanggal', '$waktu');");
+    }
+    public function get_iduser_in_good($id){
+        $id = $this->leon->decode_id($id);
+        $d = $this->db->query("SELECT DISTINCT(id_user) FROM `history_lelang` WHERE id_barang = '$id' ")->result_array();
+        for($i=0; $i < count($d); $i++){
+            $d[$i] = $d[$i]['id_user'];
+        }
+        return array_values($d);
     }		
 
 }
