@@ -30,7 +30,7 @@
   </head>
   <body>
     <nav style="background: #1f6e70;" class="navbar sticky-top navbar-dark py-md-3 py-1">
-      <a class="navbar-brand" href="javascript:window.history.back()"><i class="fas fa-chevron-left"></i></a>
+      <a class="navbar-brand" href="javascript:window.history.back()"><i class="fas fa-chevron-left"></i> Kembali</a>
     </nav>
     <section class="container mt-md-4 mt-2">
       <div class="row justify-content-center">

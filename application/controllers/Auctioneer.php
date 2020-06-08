@@ -42,7 +42,6 @@ class Auctioneer extends CI_Controller {
 					'history' => $this->goods->get_history_the($id)
 				);
 
-            $arr['goods']['harga_akhir'] = 'Rp. '.number_format($arr['goods']['harga_akhir'],2,',','.');
 			$this->load->view('auctioneer/goods', $arr);	
 			}
 		}

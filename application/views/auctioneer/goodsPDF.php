@@ -1,11 +1,19 @@
 <label><b>Nama Barang</b></label>
 <div><?= $goods['nama_barang']?></div><br>
 
-<label><b>Harga Akhir</b></label>
+<label><b>Harga</b></label>
 <div><?= $goods['harga_akhir']?></div><br>
 
 <label><b>Deskripsi</b></label>
 <div><?= $goods['deskripsi']?></div><br>
+ 
+<label><b>Pemenang</b></label>:
+
+<label><b>Nama</b></label>
+<div><?= $goods['nama']?></div><br>
+
+<label><b>No Telp</b></label>
+<div><?= $goods['telp']?></div><br>
 
 <h4 align="center">Tabel Riwayat Pengajuan</h4>				   
 <table border="1" width="100%">

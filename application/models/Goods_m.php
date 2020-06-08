@@ -118,11 +118,16 @@ class Goods_m extends CI_Model {
 
             $data['id'] = $this->leon->encode_id($data['id']);
             $data['harga_akhir'] = 'Rp. '.number_format($data['harga_akhir'],2,',','.');
+            $data['harga_awal'] = 'Rp. '.number_format($data['harga_awal'],2,',','.');
             return $data;
         }
         public function get_history_the($id){
             $id = $this->leon->decode_id($id);
             $data = $this->db->query("SELECT history_lelang.harga_penawaran as harga_penawaran, masyarakat.username as username, history_lelang.waktu as waktu, history_lelang.tanggal as tanggal FROM `history_lelang` INNER JOIN masyarakat ON history_lelang.id_user = masyarakat.id_user WHERE id_barang = '$id'")->result_array();
+
+            for($i=0;$i<count($data);$i++){
+                $data[$i]['harga_penawaran'] = 'Rp. '.number_format($data[$i]['harga_penawaran'],2,',','.');
+            }
             return $data;
         }
         public function delete($id){
