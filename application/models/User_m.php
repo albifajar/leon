@@ -7,10 +7,15 @@ class User_m extends CI_Model {
 		$this->load->database();
         $this->load->library('leon');
 	}
-    public function get_goods(){
+    public function get_goods($v = false){
+        if($v == false){
         $data = $this->db->query("SELECT barang.id_barang as id, barang.nama_barang as nama, lelang.harga_akhir as harga, gambar_barang.nama_gambar as gambar FROM `barang` INNER JOIN gambar_barang ON barang.id_barang = gambar_barang.id_barang INNER JOIN lelang ON barang.id_barang = lelang.id_barang WHERE lelang.status = 'buka'
             ")->result_array();
+        }else{
 
+        $data = $this->db->query("SELECT barang.id_barang as id, barang.nama_barang as nama, lelang.harga_akhir as harga, gambar_barang.nama_gambar as gambar FROM `barang` INNER JOIN gambar_barang ON barang.id_barang = gambar_barang.id_barang INNER JOIN lelang ON barang.id_barang = lelang.id_barang WHERE lelang.status = 'buka' AND barang.slug_kategori = '$v'")->result_array();
+
+        }
             for($i=0;$i<count($data);$i++){
                 $data[$i]['id'] = $this->leon->encode_id($data[$i]['id']);
                 $data[$i]['harga'] = number_format($data[$i]['harga'],2,',','.');
@@ -47,6 +52,39 @@ class User_m extends CI_Model {
             $d[$i] = $d[$i]['id_user'];
         }
         return array_values($d);
-    }		
+    }
+    public function categories(){
+        return $this->db->query("SELECT DISTINCT barang_kategori.nama as nama,barang_kategori.slug as slug FROM barang_kategori RIGHT JOIN barang ON barang_kategori.slug = barang.slug_kategori ")->result_array();
+
+    }
+    public function get_profile($id = false){
+        if($id !== false){
+                $this->db->where('id_user', $id);
+        return  $this->db->get('masyarakat')
+                    ->result_array()[0];   
+        }
+    }
+    public function user_history($id = false){
+        if($id !== false){
+        $this->db->select(" 
+            barang.nama_barang as nama_barang,
+            barang.id_barang as id_barang, 
+            lelang.harga_akhir as harga_akhir,
+            history_lelang.harga_penawaran as harga_penawaran,
+            lelang.status as status,
+            masyarakat.username as username")
+         ->from("history_lelang")
+         ->join("lelang", "history_lelang.id_lelang = lelang.id_lelang")
+         ->join("barang", "history_lelang.id_barang = barang.id_barang")
+         ->join("masyarakat", "lelang.id_user = masyarakat.id_user")
+         ->where("history_lelang.id_user = $id");
+        
+        $data = $this->db->get()->result_array();
+        for($i=0;$i<count($data);$i++){
+            $data[$i]['id_barang'] = $this->leon->encode_id($data[$i]['id_barang']);
+        }
+        return $data;
+    }
+}
 
 }

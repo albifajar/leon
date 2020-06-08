@@ -7,16 +7,16 @@
                                 Dashboard</a
                             >
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Barang" aria-expanded="false" aria-controls="Barang"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                ><div class="sb-nav-link-icon"><i class="fas fa-cubes"></i></div>
                                 Barang
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                             ></a>
                             <div class="collapse" id="Barang" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="<?=base_url()?>admin/auctioneer">Tampilkan</a>
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="<?=base_url()?>admin/goods">Tampilkan</a>
                                 <a class="nav-link" href="<?=base_url()?>admin/categories">Kategori</a></nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pelelang" aria-expanded="false" aria-controls="Pelelang"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                ><div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
                                 Pelelang
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                             ></a>

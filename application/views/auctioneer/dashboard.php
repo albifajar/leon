@@ -73,6 +73,7 @@
               <a class="dropdown-item" href="<?=base_url()?>auctioneer/goods/<?=$row['id']?>"><i class="fas fa-eye"></i> Tampilkan</a>
               <?php if($row['status'] !== 'buka'):?>
               <a class ="dropdown-item d-none" href="<?=base_url()?>auctioneer/goods_update/<?=$row['id']?>"><i class="fas fa-edit"></i> Ubah</a>
+              <a href="<?=base_url('auctioneer/goodsPDF/').$row['id']?>" class="dropdown-item"><i class="fas fa-file-pdf"></i> Report</a>
             <?php endif?>
               <?php $id =$row['id']?>
               <button class ="dropdown-item" onclick="delConfirm('<?=base_url()?>auctioneer/goods_delete/<?=$id?>')"><i class="fas fa-trash-alt"></i> Hapus</button>

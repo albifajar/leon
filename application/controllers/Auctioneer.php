@@ -85,16 +85,16 @@ class Auctioneer extends CI_Controller {
 	public function goods_create(){
 		//convert prince ke integer
 		 intval(implode('',explode(',', $this->input->post('prince'))));
-
+		$data['cats'] = $this->goods->categories();
 		if($this->goods->validation_create()){
 			if($this->goods->insert($this->input->post())){
 				redirect('auctioneer');
 			}else{
-				$this->load->view('auctioneer/goods_create');
+				$this->load->view('auctioneer/goods_create', $data);
 			}
 		}else{
 			
-		$this->load->view('auctioneer/goods_create');
+		$this->load->view('auctioneer/goods_create', $data);
 		}
 	}
 	public function logout(){

@@ -20,7 +20,7 @@
     <section class="container" style="position: relative; top: 20vh">
       <div class="row justify-content-center">
         <div class="col-12 col-md-6 col-lg-5">
-          <div class="kotak p-2" style="width: 100%">
+          <div class="kotak px-2 py-3" style="width: 100%;">
           <div style="margin: auto; width: 150px; padding: 10px 0px">
             <img src="<?=base_url();?>source/logo-light.png?>" width="100%">
           </div>
@@ -37,7 +37,7 @@
                 <label for="exampleInputPassword1">Kata Sandi</label>
                 <input name="password" type="password"  minlength="8" maxlength="16" class="form-control" required>
               </div>
-              <div class="form-group">
+              <div class="form-group d-none">
                 <input name="remember" type="checkbox" class="form-check-input custom" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Ingatkan saya</label>
               </div>

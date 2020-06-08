@@ -58,7 +58,6 @@
           </div>
         </div>
       <div class="col-md-6 d-none d-md-block ilustration">
-        <span style="position: absolute; bottom: 100px; right: 20px">Ilustration by <a href="https://undraw.co/illustrations">undraw.co</a></span>
       </div>
       </div>
     </section>

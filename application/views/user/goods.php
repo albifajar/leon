@@ -15,6 +15,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <!--Sweetalert2-->
     <link rel="stylesheet" href="<?=base_url()?>source/vendor/sweetalert2/sweetalert2.min.css">
+    <style type="text/css">
+      
+  figure.img-thumbnail img{
+    height: 100%;
+    max-width: 100%;
+    width: auto;
+    display: inline-block;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+    </style>
     <title>LEON</title>
   </head>
   <body>
@@ -26,7 +37,9 @@
         <div class="col-12 col-md-8 my-3" style="margin-top:20px">
           <div class="card mb-4" id="item">
             <div class="cover-kotak" style="max-height: 350px; overflow-y: hidden;">
-              <img v-bind:src="gambar" width="100%;" style="margin-top: -50px">
+              <figure class="thumbnail" style="height: 200px; width: 100%;">
+                <img v-bind:src="gambar" width="100%">
+              </figure>
             </div>
             <div class="card-body">
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">

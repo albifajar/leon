@@ -8,6 +8,7 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <!-- My Style -->
   <link rel="stylesheet" href="<?=base_url()?>source/dist/css/user.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -52,6 +53,16 @@
             <div class="messages"><?= form_error('prince');?></div>
           </div>
           <div class="form-group">
+            <label for="prince">Kategori</label>
+            <select class="form-control cats" name="category">
+                <option></option>
+              <?php foreach ($cats as $row ): ?>
+                <option value="<?= $row['slug']?>"><?= $row['nama']?></option> 
+              <?php endforeach?>
+            </select>
+            <div class="messages"><?= form_error('prince');?></div>
+          </div>
+          <div class="form-group">
            <label for="Deskripsi">Deskripsi</label>
            <textarea id="Deskripsi" name="description" class="form-control"><?= set_value('description');?></textarea>
            <div class="messages"><?= form_error('description');?></div>
@@ -64,20 +75,28 @@
      </div>
    </div>
  </div>
+</div>
 </section>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
-<script src="<?=base_url()?>source/vendor/popper.min.js"></script>
-<script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-    <script src="<?=base_url()?>source/vendor/cleave.min.js"></script>
-<script type="text/javascript">
+  <script src="<?=base_url()?>source/vendor/jquery-3.3.1.min.js"></script>
+  <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
+  <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+  <script src="<?=base_url()?>source/vendor/cleave.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script type="text/javascript">
   
-var cleave = new Cleave($("#prince"), {
-    numeral: true,
-    numeralThousandsGroupStyle: 'thousand'
-});
-</script>
+  var cleave = new Cleave($("#prince"), {
+      numeral: true,
+      numeralThousandsGroupStyle: 'thousand'
+  });
+  $(document).ready(function() {
+    $('.cats').select2({
+      placeholder: "Pilih kategori ...",
+      allowClear: true
+    });
+  });
+  </script>
 </body>
 </html>

@@ -23,12 +23,14 @@ class User extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->model('user_m','user');
+		$this->load->model('goods_m', 'goods');
 	}
 	public function index()
 	{
 		$this->load->view('user/main',
 			array(
-				"data" => $this->user->get_goods()
+				"data" => $this->user->get_goods(),
+				"cats" => $this->user->categories()
 			)
 		);
 	}
@@ -39,6 +41,14 @@ class User extends CI_Controller {
 		}else{
 			redirect('login');
 		}
+	}
+	public function profil(){
+		if($this->session->level !== 'user'){
+			redirect('');
+		}
+		$data['history'] = $this->user->user_history($this->session->id);
+		$data['data'] = $this->user->get_profile($this->session->id);
+		$this->load->view('user/profil', $data);
 	}
 	public function goods($id = false)
 	{
@@ -71,14 +81,17 @@ class User extends CI_Controller {
 				)
 			);
 		}
-
-			var_dump(array_diff($this->user->get_iduser_in_good($id), [$this->session->id]));
+		array_diff($this->user->get_iduser_in_good($id), [$this->session->id]);
 	}
 	public function get_goods($id = false){
 		if($id !== false){
 			echo json_encode($this->user->get_the_goods($id));
 		}else{
+			if($cat = $this->input->get('cat')){
+				echo json_encode($this->user->get_goods($cat));
+			}else{
 			echo json_encode($this->user->get_goods());
+			}
 		}
 	}
 }

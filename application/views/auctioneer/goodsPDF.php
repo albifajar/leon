@@ -12,7 +12,7 @@
 	<thead>
 		<tr>
 		  <th>Jam/Tanggal</th>
-		  <th>Nama</th>
+		  <th>Username</th>
 		  <th>Harga</th>
 		</tr>
 	</thead>

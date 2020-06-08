@@ -50,8 +50,9 @@ class Goods_m extends CI_Model {
             $deskripsi = $data['description'];
             $tanggal = date('Y-m-d');
             $waktu = date('H:i:s');
+            $kategori = $data['category'];
            	//insert ke tabel barang
-            $this->db->query("INSERT INTO barang VALUES ('', '$nama','$tanggal','$waktu', '$harga', '$deskripsi')");
+            $this->db->query("INSERT INTO barang VALUES ('', '$nama','$tanggal','$waktu', '$harga', '$deskripsi', '$kategori')");
             //get id_barang
             $id_barang = $this->db->query("SELECT id_barang FROM barang WHERE nama_barang = '$nama' AND tanggal = '$tanggal' AND waktu = '$waktu'")->result_array()[0]['id_barang'];
             //get id_petugas di session
@@ -71,10 +72,17 @@ class Goods_m extends CI_Model {
         public function update($d){
             $d;
         }
-        public function get(){
+        public function get($data = false){
+            if($data == false){
             $id_petugas = $this->session->id;
             //get data lelang
+
             $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE id_petugas = '$id_petugas'  ORDER BY barang.waktu DESC")->result_array();
+            }elseif($data == 'admin'){
+            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang ORDER BY barang.waktu DESC")->result_array();
+            }else{
+                return false;
+            }
 
             for($i=0;$i<count($data);$i++){
                 $data[$i]['id'] = $this->leon->encode_id($data[$i]['id']);
@@ -89,9 +97,27 @@ class Goods_m extends CI_Model {
         }
         public function get_the($id){
             $id = $this->leon->decode_id($id);
-            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status, barang.deskripsi AS deskripsi FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE lelang.id_barang = '$id'")->result_array()[0];
-            $data['id'] = $this->leon->encode_id($data['id']);
 
+            $this->db->select("
+                lelang.id_barang AS id, 
+                barang.nama_barang AS nama_barang, 
+                lelang.harga_akhir AS harga_akhir, 
+                barang.harga_awal AS harga_awal, 
+                barang.deskripsi AS deskripsi,
+                lelang.status AS status,
+                masyarakat.username AS username,
+                masyarakat.nama_lengkap AS nama,
+                masyarakat.telp AS telp
+                ")
+            ->from("lelang")
+            ->join("barang", "barang.id_barang = lelang.id_barang")
+            ->join("masyarakat", "masyarakat.id_user = lelang.id_user")
+            ->where("lelang.id_barang = '$id'");
+            
+            $data = $this->db->get()->result_array()[0];
+
+            $data['id'] = $this->leon->encode_id($data['id']);
+            $data['harga_akhir'] = 'Rp. '.number_format($data['harga_akhir'],2,',','.');
             return $data;
         }
         public function get_history_the($id){
@@ -111,6 +137,12 @@ class Goods_m extends CI_Model {
         }
         public function set_status($d){
             $d['i'] = $this->leon->decode_id($d['i']);
+            $this->db->select('id_user, status');
+            $this->db->where('id_barang', $d['i']);
+            $prima = $this->db->get('lelang')->result_array()[0];
+            if($prima['id_user'] !== 1 && $prima['status'] == 'buka'){
+                $d['s'] = 'berakhir';   
+            }
             $this->db->set('status', $d['s']);
             $this->db->where('id_barang', $d['i']);
             $this->db->update('lelang');

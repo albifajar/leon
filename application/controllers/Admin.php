@@ -29,7 +29,23 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/header');
 		$this->load->view('admin/dashboard');
 	}
+	public function goods(){
+		$data['data'] = $this->goods->get('admin');
+		$this->load->view('admin/goods', $data);
+	}
 
+	public function goodsPDF($id=false)
+	{
+		$mpdf = new \Mpdf\Mpdf();
+			$arr = array(
+				'goods' => $this->goods->get_the($id),
+				'history' => $this->goods->get_history_the($id)
+			);
+		$data = $this->load->view('auctioneer/goodsPDF', $arr, true);
+		$mpdf->WriteHTML($data);
+		$mpdf->Output("Report.pdf", \Mpdf\Output\Destination::INLINE);
+	}
+	
 	public function categories(){
 		
 		$data['cats'] = $this->goods->categories();
@@ -51,6 +67,7 @@ class Admin extends CI_Controller {
 	public function category_delete($id=false){
 		if($id !== false){
 			$this->goods->category_delete($id);
+			redirect('admin/categories');
 		}else{
 			redirect('admin/categories');
 		}
