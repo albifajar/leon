@@ -99,7 +99,8 @@
           <div class="judul">
             <a class="judul-link" v-bind:href="'<?=base_url()?>user/goods/'+item.id">{{ item.nama }}</a>
           </div>
-          <div class="harga mt-2">{{ item.harga }}</div>
+          <div class="harga mt-2 text-left">{{ item.harga }}</div>
+          <div class="mt-2">Berakhir Pada: {{ item.tanggal_akhir }}</div>
         </div>
       </div>
     </div>

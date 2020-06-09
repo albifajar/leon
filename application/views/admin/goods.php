@@ -35,6 +35,7 @@
                   <table class="table" id="dataTable">
                     <thead>
                       <tr>
+                      <th>Waktu</th>
                         <th>Nama Barang</th>
                         <th>Harga Awal</th>
                         <th>Harga Akhir</th>
@@ -44,6 +45,7 @@
                     </thead>
                     <tfoot>
                     <tr>
+                      <th>Waktu</th>
                       <th>Nama Barang</th>
                       <th>Harga Awal</th>
                       <th>Harga Akhir</th>
@@ -54,6 +56,7 @@
                     <tbody>
                       <?php foreach ($data as $row) :?>
                       <tr>
+                        <td><?=$row['waktu']?></td>
                         <td><?=$row['nama_barang']?></td>
                         <td><?=$row['harga_awal']?></td>
                         <td><?=$row['harga_akhir']?></td>

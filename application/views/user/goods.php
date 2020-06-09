@@ -45,6 +45,7 @@
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div style="padding: 7px 2px"><label style="margin-right: 22px; font-weight: 650">Nama barang</label>: {{ nama }}</div>
                 <div style="padding: 7px 2px"><label style="margin-right: 5px; font-weight: 650">Harga Tertinggi</label>: Rp. <span class="uang">{{ harga }}</span></div>
+                <div style="padding: 7px 2px"><label style="margin-right: 20px; font-weight: 650">Berakhir Pada</label>: {{ tanggal_akhir }}</div>
               </div>
               <div class="mt-2">
                 <label style="margin-right: 54px;font-weight: 650">Deskripsi</label> :

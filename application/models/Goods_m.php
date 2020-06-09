@@ -48,6 +48,7 @@ class Goods_m extends CI_Model {
             //convert harga
             $harga = intval(implode('',explode(',', $data['prince'])));
             $deskripsi = $data['description'];
+            $tanggal_akhir = $data['date'];
             $tanggal = date('Y-m-d');
             $waktu = date('H:i:s');
             $kategori = $data['category'];
@@ -60,7 +61,7 @@ class Goods_m extends CI_Model {
             //untuk status ada dua pilihan value yaitu 'buka' dan 'tutup'
             $status = 'tutup';
             //insert ke tabel lelang
-            $this->db->query("INSERT INTO lelang(id_lelang, id_barang, harga_akhir, id_petugas, status) VALUES ('', '$id_barang','$harga','$id_petugas','$status');");
+            $this->db->query("INSERT INTO lelang(id_lelang, id_barang, tanggal_lelang, harga_akhir, id_petugas, status) VALUES ('', '$id_barang','$tanggal_akhir','$harga','$id_petugas','$status');");
             $this->db->query("INSERT INTO gambar_barang VALUES ('', '$id_barang', '$id_petugas', '$nama_gambar') ");
             
             if($this->db->affected_rows()>0){
@@ -77,9 +78,9 @@ class Goods_m extends CI_Model {
             $id_petugas = $this->session->id;
             //get data lelang
 
-            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE id_petugas = '$id_petugas'  ORDER BY barang.waktu DESC")->result_array();
+            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status, CONCAT_WS(' ', barang.tanggal, barang.waktu) as waktu FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang WHERE id_petugas = '$id_petugas'  ORDER BY waktu DESC")->result_array();
             }elseif($data == 'admin'){
-            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang ORDER BY barang.waktu DESC")->result_array();
+            $data = $this->db->query("SELECT lelang.id_barang AS id, barang.nama_barang AS nama_barang, lelang.harga_akhir AS harga_akhir, barang.harga_awal AS harga_awal, lelang.status AS status, CONCAT_WS(' ', barang.tanggal, barang.waktu) as waktu FROM `lelang` INNER JOIN barang ON barang.id_barang = lelang.id_barang ORDER BY waktu DESC")->result_array();
             }else{
                 return false;
             }
@@ -102,6 +103,7 @@ class Goods_m extends CI_Model {
                 lelang.id_barang AS id, 
                 barang.nama_barang AS nama_barang, 
                 lelang.harga_akhir AS harga_akhir, 
+                lelang.tanggal_lelang AS tanggal_akhir, 
                 barang.harga_awal AS harga_awal, 
                 barang.deskripsi AS deskripsi,
                 lelang.status AS status,
@@ -145,7 +147,7 @@ class Goods_m extends CI_Model {
             $this->db->select('id_user, status');
             $this->db->where('id_barang', $d['i']);
             $prima = $this->db->get('lelang')->result_array()[0];
-            if($prima['id_user'] !== 1 && $prima['status'] == 'buka'){
+            if( (integer) $prima['id_user'] !== 1 && $prima['status'] == 'buka'){
                 $d['s'] = 'berakhir';   
             }
             $this->db->set('status', $d['s']);

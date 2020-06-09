@@ -9,7 +9,7 @@ class User_m extends CI_Model {
 	}
     public function get_goods($v = false){
         if($v == false){
-        $data = $this->db->query("SELECT barang.id_barang as id, barang.nama_barang as nama, lelang.harga_akhir as harga, gambar_barang.nama_gambar as gambar FROM `barang` INNER JOIN gambar_barang ON barang.id_barang = gambar_barang.id_barang INNER JOIN lelang ON barang.id_barang = lelang.id_barang WHERE lelang.status = 'buka'
+        $data = $this->db->query("SELECT barang.id_barang as id, barang.nama_barang as nama, lelang.harga_akhir as harga, lelang.tanggal_lelang as tanggal_akhir, gambar_barang.nama_gambar as gambar FROM `barang` INNER JOIN gambar_barang ON barang.id_barang = gambar_barang.id_barang INNER JOIN lelang ON barang.id_barang = lelang.id_barang WHERE lelang.status = 'buka'
             ")->result_array();
         }else{
 
@@ -24,7 +24,7 @@ class User_m extends CI_Model {
     }
     public function get_the_goods($id){
             $id = $this->leon->decode_id($id);
-        	$data = $this->db->query("SELECT barang.id_barang as id, barang.nama_barang as nama, lelang.harga_akhir as harga, gambar_barang.nama_gambar as gambar, barang.deskripsi FROM `barang` INNER JOIN gambar_barang ON barang.id_barang = gambar_barang.id_barang INNER JOIN lelang ON barang.id_barang = lelang.id_barang WHERE barang.id_barang = '$id'")->result_array()[0];
+        	$data = $this->db->query("SELECT barang.id_barang as id, barang.nama_barang as nama, lelang.harga_akhir as harga, gambar_barang.nama_gambar as gambar, barang.deskripsi, lelang.tanggal_lelang as tanggal_akhir FROM `barang` INNER JOIN gambar_barang ON barang.id_barang = gambar_barang.id_barang INNER JOIN lelang ON barang.id_barang = lelang.id_barang WHERE barang.id_barang = '$id'")->result_array()[0];
             if($this->db->affected_rows()<1){
                 return FALSE;
             }
@@ -66,11 +66,11 @@ class User_m extends CI_Model {
     }
     public function user_history($id = false){
         if($id !== false){
-        $this->db->select(" 
+        $this->db->select("
             barang.nama_barang as nama_barang,
             barang.id_barang as id_barang, 
             lelang.harga_akhir as harga_akhir,
-            history_lelang.harga_penawaran as harga_penawaran,
+            lelang.tanggal_lelang as tanggal_akhir,
             lelang.status as status,
             masyarakat.username as username")
          ->from("history_lelang")
@@ -79,9 +79,11 @@ class User_m extends CI_Model {
          ->join("masyarakat", "lelang.id_user = masyarakat.id_user")
          ->where("history_lelang.id_user = $id");
         
+        $this->db->distinct();
         $data = $this->db->get()->result_array();
         for($i=0;$i<count($data);$i++){
             $data[$i]['id_barang'] = $this->leon->encode_id($data[$i]['id_barang']);
+            $data[$i]['harga_akhir'] = 'Rp. '.number_format($data[$i]['harga_akhir'],2,',','.');
         }
         return $data;
     }

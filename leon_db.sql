@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Jun 2020 pada 14.06
+-- Waktu pembuatan: 09 Jun 2020 pada 09.21
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -51,7 +51,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `tanggal`, `waktu`, `harga_awa
 (35, 'Suzuki Karimun Kotak th 2001', '2020-06-06', '15:52:45', '41000000', 'Suzuki Karimun kotak th 2001, pajak Hidup sampai 12-2020, Body mulus kinclong orginal luar dalam', 'mobil'),
 (36, 'VESPA 946 EMPORIO ARMANI', '2020-06-06', '18:09:48', '370000000', 'Vespa 946 Emporio Armani pmk 2016 Plat D, Tangan Pertama, Pajak Juni 2021, Mulus', 'motor'),
 (37, 'Fs koleksian softail deluxe full paper', '2020-06-06', '18:12:21', '585000000', 'Kondisi motor simpenan jarang pake , udah full opsion', 'motor'),
-(38, 'test', '2020-06-08', '13:59:48', '40000', 'test test test test test', '');
+(39, 'test', '2020-06-09', '09:56:13', '4000000', 'albiababsjhhiqwu ksjdakjdska', 'lainnya');
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ INSERT INTO `gambar_barang` (`id_gambar`, `id_barang`, `id_petugas`, `nama_gamba
 (12, 35, 7, 'MTAwMTYz_hVPByBOdX0.jpg'),
 (13, 36, 7, 'MTAwMTYz_OZp7xL3k1x.jpg'),
 (14, 37, 7, 'MTAwMTYz_gMixUlKLqN.jpg'),
-(15, 38, 7, '');
+(16, 39, 7, 'MTAwMTYz_BmIJwb8mnP.jpg');
 
 -- --------------------------------------------------------
 
@@ -126,8 +126,12 @@ CREATE TABLE `history_lelang` (
 
 INSERT INTO `history_lelang` (`id_history`, `id_lelang`, `id_barang`, `id_user`, `harga_penawaran`, `tanggal`, `waktu`) VALUES
 (44, 27, 30, 4, '1450000000', '2020-06-08', '07:48:18'),
-(45, 35, 38, 4, '4000000', '2020-06-08', '14:27:15'),
-(46, 27, 30, 3, '1460000000', '2020-06-08', '15:22:40');
+(46, 27, 30, 3, '1460000000', '2020-06-08', '15:22:40'),
+(47, 27, 30, 4, '14600001000', '2020-06-09', '09:06:47'),
+(48, 27, 30, 6, '4000000000000', '2020-06-09', '13:20:30'),
+(49, 29, 32, 6, '400000000', '2020-06-09', '13:21:37'),
+(50, 30, 33, 7, '1000000', '2020-06-09', '13:54:22'),
+(51, 30, 33, 4, '1500000', '2020-06-09', '13:56:07');
 
 -- --------------------------------------------------------
 
@@ -151,15 +155,15 @@ CREATE TABLE `lelang` (
 --
 
 INSERT INTO `lelang` (`id_lelang`, `id_barang`, `tanggal_lelang`, `waktu_lelang`, `harga_akhir`, `id_user`, `id_petugas`, `status`) VALUES
-(27, 30, NULL, NULL, 1460000000, 3, 7, 'buka'),
-(28, 31, NULL, NULL, 5000000, 1, 7, 'buka'),
-(29, 32, NULL, NULL, 7000000, 1, 7, 'buka'),
-(30, 33, NULL, NULL, 500000, 1, 7, 'buka'),
-(31, 34, NULL, NULL, 895000000, 1, 7, 'buka'),
-(32, 35, NULL, NULL, 41000000, 1, 7, 'buka'),
-(33, 36, NULL, NULL, 370000000, 1, 7, 'buka'),
-(34, 37, NULL, NULL, 585000000, 1, 7, 'buka'),
-(35, 38, NULL, NULL, 4000000, 4, 7, 'berakhir');
+(27, 30, '2020-07-30', NULL, 2147483647, 6, 7, 'buka'),
+(28, 31, '2020-07-30', NULL, 5000000, 1, 7, 'tutup'),
+(29, 32, '2020-07-30', NULL, 400000000, 6, 7, 'berakhir'),
+(30, 33, '2020-07-30', NULL, 1500000, 4, 7, 'berakhir'),
+(31, 34, '2020-07-30', NULL, 895000000, 1, 7, 'buka'),
+(32, 35, '2020-07-30', NULL, 41000000, 1, 7, 'buka'),
+(33, 36, '2020-07-30', NULL, 370000000, 1, 7, 'buka'),
+(34, 37, '2020-07-30', NULL, 585000000, 1, 7, 'buka'),
+(36, 39, '2020-06-10', NULL, 4000000, 1, 7, 'buka');
 
 -- --------------------------------------------------------
 
@@ -204,7 +208,9 @@ INSERT INTO `masyarakat` (`id_user`, `nama_lengkap`, `username`, `password`, `te
 (2, 'albi fajar', 'alfarama', '$2y$10$ug7TnRKx88GlH7ju8UnM/O5n4mXaPXYA1ZhcJUw3QwXDKp9VLUQBe', '089691527986', ''),
 (3, 'albi fajar ramadhan', 'alfa', '$2y$10$.TDIFxXcZnx67qCxBFiopO69tJRdohZf24wV3R7/6uARnv32lOEUq', '009900000000', ''),
 (4, 'albi fajar ramadhan', 'house', '$2y$10$d4UbEMOFZghMIu3wxQGWSeFYP4fWq6/sS.emdRbLpzzc6.KQZjo0G', '089691527986', ''),
-(5, 'memusnakan kelise', 'muse', '$2y$10$5jriCqDS.W9J4AZOd2xVXO7ktf0sJbbdkluKL4MJRhkxjRkAUiX32', '089691527986', '');
+(5, 'memusnakan kelise', 'muse', '$2y$10$5jriCqDS.W9J4AZOd2xVXO7ktf0sJbbdkluKL4MJRhkxjRkAUiX32', '089691527986', ''),
+(6, 'albi fajar ramadhan', 'albi', '$2y$10$EyMJJuqJJ2MsEgPdsLAM2.icAAvelXmFWLuVBTAK0D7QRTJm8Tnli', '089691527986', ''),
+(7, 'Anwar Maulana', 'anwarmau0207', '$2y$10$edEMRArFN45JfYfvVe5ANOBcgMXEIWKk1sakd4PgMzbcgXnpmxO/m', '085321210211', '');
 
 -- --------------------------------------------------------
 
@@ -348,7 +354,7 @@ ALTER TABLE `petugas`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `barang_kategori`
@@ -360,19 +366,19 @@ ALTER TABLE `barang_kategori`
 -- AUTO_INCREMENT untuk tabel `gambar_barang`
 --
 ALTER TABLE `gambar_barang`
-  MODIFY `id_gambar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_gambar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `history_lelang`
 --
 ALTER TABLE `history_lelang`
-  MODIFY `id_history` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_history` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT untuk tabel `lelang`
 --
 ALTER TABLE `lelang`
-  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT untuk tabel `level`
@@ -384,7 +390,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT untuk tabel `masyarakat`
 --
 ALTER TABLE `masyarakat`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `pesan`

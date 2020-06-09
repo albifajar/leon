@@ -26,52 +26,57 @@
         <a class="navbar-brand" href="<?=base_url()?>auctioneer"><i class="fas fa-chevron-left"></i> Kembali</a>
       </div>
     </nav>
-    <section class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-6 my-3" style="margin-top:20px">
-          <div class="container">
-            <div class="card mb-4">
-              <div class="card-header" style="background: #fafafa;"><i class="fas fa-notes1-medical"></i> Tambah Barang</div>
-              <div class="card-body">
-                <?= form_open_multipart("auctioneer/goods_create")?>
-                <div class="form-group">
-                  <label for="barang">Nama Barang</label>
-                  <input type="text"  value="<?=set_value('name_goods')?>" name="name_goods" class="form-control" id="barang" aria-describedby="emailHelp" >
-                  <div class="messages"><?= form_error('name_goods');?></div>
-                </div>
-                <div class="form-group">
-                  <label for="prince">Gambar Barang</label>
-                  <input type="file" class="form-control" name="file" size="20" />
-                </div>
-                <div class="form-group">
-                  <label for="prince">Harga Barang</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1">Rp</span>
-                    </div>
-                    <input type ="text" value="<?=set_value('prince')?>" name="prince" class="form-control" id="prince" aria-describedby="emailHelp" >
-                  </div>
-                  <div class="messages"><?= form_error('prince');?></div>
-                </div>
-                <div class="form-group">
-                  <label for="prince">Kategori</label>
-                  <select class="form-control cats" name="category">
-                    <option></option>
-                    <?php foreach ($cats as $row ): ?>
-                    <option value="<?= $row['slug']?>"><?= $row['nama']?></option>
-                    <?php endforeach?>
-                  </select>
-                  <div class="messages"><?= form_error('prince');?></div>
-                </div>
-                <div class="form-group">
-                  <label for="Deskripsi">Deskripsi</label>
-                  <textarea id="Deskripsi" name="description" class="form-control"><?= set_value('description');?></textarea>
-                  <div class="messages"><?= form_error('description');?></div>
-                </div>
-                <button type="submit" name="tambahkan" class="btn btn-leon">Selesai</button>
-                <button type="submit" class="d-none btn mt-sm-0 mt-3 btn-leon">Aktifkan</button>
-                <?= form_close()?>
+    <section class="container">
+      <div class="row">
+        <div class="col-12 col-md-10 my-3" style="margin-top:20px">
+          <div class="card mb-4">
+            <div class="card-header" style="background: #fafafa;"><i class="fas fa-notes1-medical"></i> Tambah Barang</div>
+            <div class="card-body">
+              <?= form_open_multipart("auctioneer/goods_create")?>
+              <div class="form-group">
+                <label for="barang">Nama Barang</label>
+                <input type="text"  value="<?=set_value('name_goods')?>" name="name_goods" class="form-control" id="barang" aria-describedby="emailHelp" >
+                <div class="messages"><?= form_error('name_goods');?></div>
               </div>
+              <div class="form-group">
+                <label for="prince">Gambar Barang</label>
+                <input type="file" class="form-control" name="file" size="20" />
+              </div>
+              <div class="form-group">
+                <label for="prince">Harga Barang</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                  </div>
+                  <input type ="text" value="<?=set_value('prince')?>" name="prince" class="form-control" id="prince" aria-describedby="emailHelp" >
+                </div>
+                <div class="messages"><?= form_error('prince');?></div>
+              </div>
+              <div class="form-group">
+                <label for="prince">Akhir Lelang</label>
+                <div class="input-group mb-3">
+                  <input type ="date" name="date" class="form-control date-s" aria-describedby="emailHelp" >
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="prince">Kategori</label>
+                <div class="d-block">
+                <select class="cats col-6" name="category">
+                  <option></option>
+                  <?php foreach ($cats as $row ): ?>
+                  <option value="<?= $row['slug']?>"><?= $row['nama']?></option>
+                  <?php endforeach?>
+                </select>
+              </div>
+              </div>
+              <div class="form-group">
+                <label for="Deskripsi">Deskripsi</label>
+                <textarea id="Deskripsi" name="description" rows="6" class="form-control"><?= set_value('description');?></textarea>
+                <div class="messages"><?= form_error('description');?></div>
+              </div>
+              <button type="submit" name="tambahkan" class="btn btn-leon">Selesai</button>
+              <button type="submit" class="d-none btn mt-sm-0 mt-3 btn-leon">Aktifkan</button>
+              <?= form_close()?>
             </div>
           </div>
         </div>
@@ -85,7 +90,6 @@
     <script src="<?=base_url()?>source/vendor/cleave.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script type="text/javascript">
-    
     var cleave = new Cleave($("#prince"), {
     numeral: true,
     numeralThousandsGroupStyle: 'thousand'

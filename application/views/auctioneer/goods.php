@@ -59,7 +59,7 @@
   <body style="max-width: 100%; overflow-x: hidden;">
     <nav style="background: #1f6e70;" class="navbar navbar-dark py-1">
       <div class="container">
-      <a class="navbar-brand" href="javascript:window.history.back()"><i class="fas fa-chevron-left"></i> Kembali</a>
+      <a class="navbar-brand" href="<?=base_url()?>auctioneer"><i class="fas fa-chevron-left"></i> Kembali</a>
       <div>
         <a href="<?=base_url('auctioneer/goodsPDF/').$goods['id']?>" class="btn btn-leon"><i class="fas fa-file-pdf"></i> Report</a>
       </div>
@@ -80,6 +80,10 @@
                 <div class="form-group">
                   <label for="harga">Harga Akhir</label>
                   <div class="form-control"><?= $goods['harga_akhir']?></div>
+                </div>
+                <div class="form-group">
+                  <label for="harga">Berakhir Pada</label>
+                  <div class="form-control"><?= $goods['tanggal_akhir']?></div>
                 </div>
                 <div class="form-group">
                   <label for="Deskripsi">Deskripsi</label>

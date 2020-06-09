@@ -36,11 +36,7 @@ class User extends CI_Controller {
 	}
 	public function logout(){
 		$this->session->sess_destroy();
-		if($this->session->level){
-			redirect('user');
-		}else{
-			redirect('login');
-		}
+		redirect('login');
 	}
 	public function profil(){
 		if($this->session->level !== 'user'){

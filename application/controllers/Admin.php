@@ -26,8 +26,10 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		//main of admin area
+		$data['goods'] = $this->goods->get('admin');
+
 		$this->load->view('admin/header');
-		$this->load->view('admin/dashboard');
+		$this->load->view('admin/dashboard', $data);
 	}
 	public function goods(){
 		$data['data'] = $this->goods->get('admin');

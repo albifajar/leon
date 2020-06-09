@@ -12,7 +12,7 @@
           <button class="btn dropdown-toggle text-white text-capitalize" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?=$this->session->username?>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 100px">
-            <a class="dropdown-item" href="#"><i class="fas fa-user-alt"></i> Profile</a>
+            <a class="dropdown-item d-none" href="#"><i class="fas fa-user-alt"></i> Profile</a>
             <a class="dropdown-item" href="<?=base_url()?>auctioneer/logout"><i class="fas fa-sign-out-alt"></i> Keluar</a>
           </div>
         </div>

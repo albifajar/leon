@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="<?=base_url()?>source/icon.png">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?=base_url()?>source/bootstrap-4.3.1/css/bootstrap.min.css">
     <!-- My Style -->
@@ -100,15 +99,15 @@
     <script src="<?=base_url()?>source/vendor/popper.min.js"></script>
     <script src="<?=base_url()?>source/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script src="<?=base_url()?>source/dist/js/script.js"></script>
-    <script type="text/javascript">    
-  <?php if($msg = $this->session->massage):?>
-      successProsess('<?=$msg?>');
-  <?php endif;
-  $this->session->unset_userdata('massage');
-  ?>
-      $(document).ready(function() {
-         $('#dataTable').DataTable();
-      });
+    <script type="text/javascript">
+    <?php if($msg = $this->session->massage):?>
+    successProsess('<?=$msg?>');
+    <?php endif;
+    $this->session->unset_userdata('massage');
+    ?>
+    $(document).ready(function() {
+    $('#dataTable').DataTable();
+    });
     </script>
   </body>
 </html>
